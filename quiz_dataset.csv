@@ -1,0 +1,993 @@
+input,target
+"Introduction to learning general models from data (learning, data vs knowledge, retail example)",1. What does it mean to learn a general model from particular examples?
+,2.Why is data described as cheap and abundant while knowledge is expensive and scarce?
+,3. How does the retail example with buying books illustrate learning patterns from customer transactions?
+"Short history of machine learning (ENIAC, Turing test, perceptron, statistical learning, current status)",1. What was the significance of the ENIAC computer in 1946 for computational tasks?
+,2. How did Alan Turing’s 195 proposal contribute to the foundations of AI?
+,3. What role did the perceptron developed by Frank Rosenblatt play in the history of machine learning?
+,4.How did the focus of AI research shift in the early 199s?
+Definition slide: Artificial Intelligence vs Machine Learning,1. How is artificial intelligence (AI) defined in the lecture?
+,2. In what way is machine learning (ML) described as one of the techniques under AI?
+,3. Why is ML associated with sophisticated cognitive tasks compared to simpler rule-based systems?
+Slide on four approaches to AI (different ways AI systems can be built),1. What are the different high-level approaches to building AI systems mentioned in the lecture?
+,2. How do these approaches differ in the way they attempt to achieve intelligent behavior?
+,3. Why is it useful to categorize AI approaches instead of treating AI as a single technique?
+Slide comparing other AI techniques and machine learning using the chess example,"1. In the chess example, how do traditional AI techniques try to play the game?"
+,2. How does machine learning approach the chess problem differently from rule-based systems?
+,3. Why can learning from data be more flexible than encoding all rules manually?
+“What is machine learning?” first definition slide,1. How does the lecture define machine learning at a high level?
+,2. Why is ML particularly useful for problems where programmers cannot explicitly describe the solution?
+,3. What kind of real-world tasks are difficult to handle with manually written rules but suitable for ML?
+“What is machine learning? – continued” (paradigm shift and when to use ML),1. Why is machine learning considered a paradigm shift within AI according to the lecture?
+,2. What are the two types of problems where ML is said to perform especially well?
+,3. Why are complex multidimensional problems often better handled by ML than by numerical reasoning alone?
+Slide “Machine learning problems” – general applications,1. What kinds of real-world problems are presented as examples of machine learning applications?
+,2. How does ML help robots improve their performance according to the lecture?
+,3. Why do tasks like computer vision and motion control benefit from ML techniques?
+Slide “Types of Machine Learning” – overview of three types,1. What are the three main categories of machine learning introduced in the lecture?
+,2. How is supervised learning characterized in terms of examples and labels?
+,3. Why are unsupervised and reinforcement learning considered different from supervised learning?
+Slide “Supervised Learning” – labels and correlation of features,"1. In supervised learning, what kind of data does the algorithm experience?"
+,2. How do labels or targets help the algorithm learn correlations between features?
+,3. What are the two most common supervised learning tasks mentioned in the lecture?
+Slide on classification vs regression in supervised learning,1. How does the lecture distinguish classification problems from regression problems?
+,2. What kind of output values does classification aim to predict?\
+,3. What is an example of a real-world regression problem from the slides?
+Slide on unsupervised learning – patterns without labels,1. How is unsupervised learning defined in the lecture?
+,2. Why does unsupervised learning not require labeled data?
+,"3. What is clustering, and why is it a common unsupervised learning task?"
+Slide on reinforcement learning – goal-oriented algorithms and rewards,1. How is reinforcement learning described in terms of goals and rewards?
+,2. What does the reinforcement signal represent in RL?
+,3. Why is RL suitable for problems where the correct action is not explicitly shown but feedback is given?
+Slide “Machine learning (mathematically)” with Tom Mitchell’s definition,"1. According to Tom Mitchell’s definition, what three components define machine learning?"
+,"2. In the provided example, what is the experience E, task T, and performance measure P?"
+,3. Why must performance improvement be measured on tasks rather than just memorizing past examples?
+"Slides on “The task, T” – classification, regression, structured output",1. How is the input example x typically represented in terms of features?
+,2. What mapping function does a classification task aim to learn?
+,"3. What does the lecture mean by structured output, and what is one example of it?"
+Slide on transcription and machine translation as tasks,1. What does the lecture describe as a transcription task in machine learning?
+,2. Why is machine translation considered a sequence-to-sequence problem?
+,3. How is image segmentation an example of assigning outputs at the pixel level?
+"Slide on anomaly detection, synthesis and sampling, and imputation",1. How does the lecture define anomaly detection in machine learning?
+,2. What is meant by synthesis and sampling in the context of ML?
+,3. Why is imputing missing values an important task in many datasets?
+"Slide “The performance measure, P” – accuracy and error rate",1. How is accuracy defined as a performance measure in machine learning?
+,"2. What is the error rate or –1 loss, and how is it related to accuracy?"
+,3. Why can it sometimes be difficult to decide what should be measured as performance?
+"Slide “The performance measure, P” – other metrics and test set",1. What alternative performance measures besides accuracy and error rate does the lecture mention?
+,2. Why might it be impractical to measure certain implicit performance metrics directly?
+,3. Why is a separate test set important when evaluating a model’s performance?
+"Slide “The experience, E” – supervised vs unsupervised learning","1. In supervised learning, what does the experience E consist of?"
+,2. How is the experience defined in unsupervised learning according to the slides?
+,3. What kinds of tasks can be performed when only p(x) is modeled instead of p(y|x)?
+"Slide “The experience, E” – semi-supervised, multi-instance, reinforcement","1. What is semi-supervised learning, and how does it combine labeled and unlabeled data?"
+,2. How is multi-instance learning different from standard single-instance labeling?
+,3. How is reinforcement learning characterized in terms of interaction with an environment?
+Slide “A dataset” – design matrix X,"1. What is the design matrix X, and how are examples represented in it?"
+,2. How does the lecture describe rows and columns of the design matrix?
+,"3. What example dataset shape is given, and what do its dimensions represent?"
+Slide “A dataset” – labels vector y,1. How is the label vector y defined in relation to the design matrix X?
+,2. What examples of label values are given in the slides?
+,3. How can labels be more complex than single integers in some tasks?
+Slides “Example: Linear regression” – basic idea,1. What kind of relationship does linear regression aim to model between inputs and outputs?
+,2. Why is linear regression considered a simple but powerful model?
+,3. In what type of applications is linear regression commonly used according to the lecture?
+"Slides “Capacity, overfitting and underfitting” – generalization and i.i.d.",1. What does generalization mean in the context of machine learning models?
+,2. What are the two parts of the i.i.d. assumption described in the slides?
+,3. Why is the data-generating distribution p_data important for understanding model performance?
+Slide on capacity and model complexity,1. How does model capacity relate to the ability to fit complex patterns?
+,2. What can happen if a model’s capacity is too low for the underlying data?
+,3. What risk arises when a model’s capacity is too high relative to the training set?
+Slide on underfitting – characteristics and causes,1. What signs indicate that a model is underfitting the training data?
+,2. Why might a model underfit even if trained for many iterations?
+,3. How can increasing model capacity or using a more flexible model help reduce underfitting?
+Slide on overfitting – characteristics and causes,1. What behavior of training error and test error suggests overfitting?
+,2. Why does memorizing the training data lead to poor generalization on new data?
+,3. What typical reasons are given for models overfitting in practice?
+Slide on controlling overfitting – regularization and data,1. How can regularization help control overfitting according to the lecture?
+,2. Why does increasing the amount of training data often reduce the risk of overfitting?
+,3. What is the trade-off between model capacity and regularization strength?
+Summary slide – key ideas of this fundamentals lecture,"1. What are the key components (T, P, E, dataset) that define a machine learning problem?"
+,"2. How do different types of learning (supervised, unsupervised, reinforcement) differ in their experience E?"
+,3. Why is generalization to unseen data emphasized as a central goal of machine learning?
+Slide: Probability in machine learning – need for probabilistic modeling,1. Why is probability important for building machine learning models?
+,2. How does uncertainty influence predictions in ML?
+,3. What kinds of problems require probabilistic reasoning?
+Slide: Joint probability and marginal probability,1. What is joint probability as described in the lecture?
+,2. How is marginal probability obtained from joint probability?
+,3. Why is marginalization useful when working with high-dimensional data?
+Slide: Conditional probability – basic concept,1. How does the lecture define conditional probability?
+,2. What does P(A|B) represent in practical ML settings?
+,3. Why is conditional probability essential for classification?
+Slide: Chain rule of probability – decomposition,1. What does the chain rule allow us to do with complex joint distributions?
+,2. Why is decomposition useful for modeling in machine learning?
+,3. Give an example of how chain rule helps simplify probability calculations.
+Slide: Independence and conditional independence,1. What is the difference between independence and conditional independence?
+,2. Why is conditional independence assumed in many ML models?
+,3. What simplifications occur when features are independent?
+Slide: Bayes' rule – definition and intuition,1. What is Bayes' rule and what does it relate?
+,2. Why is Bayes' rule important for updating beliefs in ML?
+,"3. How does Bayes' rule connect prior, likelihood, and posterior?"
+Slide: Naive Bayes classifier – core idea,1. What simplifying assumption does the Naive Bayes model make?
+,2. Why does Naive Bayes assume conditional independence between features?
+,3. What types of tasks is Naive Bayes commonly used for?
+Slide: Naive Bayes classification example,1. How does Naive Bayes estimate the probability of each class?
+,2. Why is normalization important when comparing class probabilities?
+,3. What step selects the final predicted class?
+Slide: Maximum likelihood estimation – idea,1. What is the main goal of maximum likelihood estimation (MLE)?
+,2. How does MLE choose parameter values for a model?
+,3. Why does maximizing likelihood lead to better fitting models?
+Slide: Likelihood vs probability,1. How does the lecture distinguish between probability and likelihood?
+,2. Why is likelihood treated as a function of parameters?
+,3. How is probability used to describe observed data?
+Slide: Optimization – gradient descent introduction,1. Why do ML models require optimization algorithms like gradient descent?
+,2. How does gradient descent update model parameters?
+,3. What role does the learning rate play in gradient descent?
+Slide: Gradient descent – geometric intuition,1. How is the gradient interpreted geometrically in the lecture?
+,2. Why does the negative gradient point toward lower cost?
+,3. What happens when the learning rate is too large?
+Slide: Stochastic gradient descent (SGD),1. How does SGD differ from standard batch gradient descent?
+,2. Why does using mini-batches speed up training?
+,3. What trade-offs are introduced by SGD's noisy updates?
+Slide: Loss functions – example: squared loss,1. What does a loss function measure in machine learning?
+,2. Why is squared loss commonly used in regression tasks?
+,3. What is the relationship between loss and model training?
+Slide: Overfitting and model evaluation using validation set,1. Why is a validation set needed in addition to a training set?
+,2. How does the validation set help detect overfitting?
+,3. What happens if hyperparameters are tuned only on training data?
+Slide: Bias–variance trade-off – conceptual slide,1. What is bias in the context of ML models?
+,2. What does variance represent in model performance?
+,3. How does the bias–variance trade-off influence model selection?
+Slide: Model capacity and expressiveness,1. How does increasing model capacity affect training error?
+,2. Why can higher capacity lead to increased variance?
+,3. What is the risk of choosing a model that is too expressive?
+Slide: Dimensionality reduction – motivation,1. Why is dimensionality reduction needed in high-dimensional datasets?
+,2. What issues arise from having too many features?
+,3. How does dimensionality reduction improve model performance?
+Slide: Principal Component Analysis (PCA) – idea,1. What is the main purpose of PCA?
+,2. How does PCA capture the directions of greatest variance?
+,3. Why does PCA create new uncorrelated components?
+Slide: PCA – geometric intuition,1. How does PCA relate to rotating the coordinate system?
+,2. Why does the first principal component capture most variance?
+,3. How is dimensionality reduced while preserving variance?
+Slide: PCA – projection onto principal components,1. What does projecting data onto principal components achieve?
+,2. Why does projection allow lower-dimensional representation?
+,3. How does PCA reduce noise in high-dimensional datasets?
+Slide: k-means clustering – core idea,1. What is the objective of k-means clustering?
+,2. How does the algorithm assign points to clusters?
+,3. What update step improves the cluster centers?
+Slide: k-means clustering – iterative process,1. Why does k-means alternate between assignment and update steps?
+,2. What criterion determines convergence in k-means?
+,3. Why is k-means sensitive to the initial choice of cluster centers?
+Slide: Mixture of Gaussians – intuition,1. What is a Gaussian mixture model (GMM)?
+,2. Why does GMM allow soft cluster assignments?
+,3. Why are mixtures more flexible than k-means?
+Slide: EM algorithm – expectation and maximization,1. What happens during the E-step of the EM algorithm?
+,2. What happens during the M-step?
+,3. Why does iterating E and M steps increase likelihood?
+Slide: Decision trees – splitting criteria,1. How do decision trees choose the best feature to split on?
+,2. Why is information gain commonly used as a splitting criterion?
+,3. What does a pure node represent in a decision tree?
+Slide: Decision trees – overfitting issue,1. Why are decision trees prone to overfitting?
+,2. How does tree depth affect complexity?
+,3. What pruning strategies help reduce overfitting in trees?
+Slide: Ensemble learning – idea of combining models,1. What is ensemble learning?
+,2. Why does combining multiple models improve performance?
+,3. What is the intuition behind “wisdom of the crowd” in ensembles?
+Slide: Bagging – bootstrap aggregating,1. How does bagging create multiple training sets?
+,2. Why does averaging predictions reduce variance?
+,3. How does bootstrapping strengthen weak learners?
+Slide: Random forests – multiple decision trees,1. How do random forests build diverse decision trees?
+,2. Why does random feature selection improve performance?
+,3. What advantage does a forest have over a single decision tree?
+Slide: Boosting – intuition and purpose,1. What problem does boosting aim to solve compared to single weak learners?
+,2. Why does boosting focus more on difficult examples during training?
+,3. How does combining weak learners produce a strong classifier?
+Slide: AdaBoost – core mechanism,1. How does AdaBoost adjust weights of misclassified examples?
+,2. Why are weak learners trained sequentially in AdaBoost?
+,3. What determines the contribution of each weak learner in the final model?
+Slide: AdaBoost – error and alpha,1. What is the significance of weighted error in AdaBoost?
+,2. Why is the alpha value larger for more accurate weak learners?
+,3. How is the final prediction computed using alphas?
+Slide: SVM – idea of maximum margin,1. What does the SVM try to maximize when separating classes?
+,2. Why does a larger margin often lead to better generalization?
+,3. What are support vectors and why are they important?
+Slide: SVM – decision boundary,1. How does the SVM choose the optimal decision boundary?
+,2. Why are only support vectors relevant for the final model?
+,3. What geometric intuition is used for margin maximization?
+Slide: Kernel trick – motivation,1. Why do some datasets require transforming input features for better separation?
+,2. How does the kernel trick allow high-dimensional mapping without explicit computation?
+,3. What kinds of kernels are commonly used?
+Slide: RBF kernel – intuition,1. Why does the RBF kernel measure similarity using distance?
+,2. How does the gamma parameter affect the kernel’s behavior?
+,3. In what scenario does the RBF kernel perform well?
+Slide: Neural networks – perceptron model,1. What components form a perceptron model according to the slide?
+,2. How does the perceptron compute its output from inputs?
+,3. What role does the activation function play?
+Slide: Neural networks – multi-layer perceptron,1. How do multiple hidden layers increase the expressive power of a neural network?
+,2. Why does adding hidden units allow modeling complex patterns?
+,3. What distinguishes deep networks from shallow networks?
+"Slide: Activation functions – sigmoid, tanh, ReLU",1. What purpose do activation functions serve in neural networks?
+,2. Why is ReLU often preferred over sigmoid or tanh?
+,3. How do activation functions introduce non-linearity?
+Slide: Forward propagation – basic concept,1. How does information flow through layers during forward propagation?
+,2. What is computed at each neuron during this process?
+,3. How do weights and biases affect the output?
+Slide: Loss functions for neural networks,1. Why does training a neural network require a loss function?
+,2. What types of loss functions are used for classification vs regression?
+,3. How does minimizing loss relate to improving predictions?
+Slide: Backpropagation – purpose,1. What is the main goal of backpropagation in neural networks?
+,2. How are gradients computed during backpropagation?
+,3. Why is the chain rule essential for backprop?
+Slide: Backpropagation – gradient flow,1. How does backpropagation move gradients from output layer to input layer?
+,2. Why are partial derivatives important for weight updates?
+,3. What problem occurs when gradients become too small or too large
+Slide: Vanishing gradient problem,1. What causes gradients to vanish in deep networks?
+, 2. Why does vanishing gradient slow down or stop learning?
+, 3. Which activation functions help reduce this problem?
+Slide: Overfitting in neural networks,1. Why are neural networks especially prone to overfitting?
+,2. How does high model capacity contribute to overfitting?
+,3. What role does training data size play?
+"Slide: Regularization – L2, dropout",1. How does L2 regularization help control overfitting?
+,2. Why does dropout randomly disable neurons during training?
+,3. How does dropout improve generalization?
+Slide: Early stopping – avoiding overfitting,1. Why does early stopping monitor validation performance?
+,2. How does stopping training early prevent overfitting?
+,3. What signals indicate it’s time to stop training?
+Slide: Convolution – basic idea,1. What is a convolution operation in the context of CNNs?
+,2. Why does convolution detect patterns like edges or textures?
+,3. How does sliding a filter across an image produce feature maps?
+Slide: CNN filters – intuition,1. What do learned filters in CNNs represent?
+,2. Why do different filters detect different visual patterns?
+,3. How do filters evolve during training?
+Slide: Pooling – max and average pooling,1. Why is pooling used in convolutional neural networks?
+,2. How does max pooling differ from average pooling?
+,3. What effect does pooling have on spatial dimensions?
+Slide: CNN architecture – layers overview,1. What role do convolutional layers play in CNN architectures?
+,2. Why are pooling layers interleaved between convolution layers?
+,3. How does flattening transition into fully connected layers?
+Slide: Recurrent neural networks – sequence modeling,1. Why are RNNs suited for sequential data?
+,2. How does hidden state allow RNNs to remember previous information?
+,3. What types of tasks commonly use RNNs?
+Slide: RNN recurrence relation,1. How does the recurrence relation define the hidden state in an RNN?
+,2. Why is sharing weights across time steps useful?
+,3. What limitation does simple RNN suffer from?
+Slide: Vanishing gradients in RNNs,1. Why do RNNs experience severe vanishing gradient issues?
+,2. How does sequence length contribute to this problem?
+,3. Why does vanishing gradient hinder long-term memory?
+Slide: LSTM – motivation,1. Why were LSTMs introduced to replace simple RNNs?
+,2. Which problems do LSTMs address in sequence learning?
+,3. Why are LSTMs better for long-range dependencies?
+Slide: LSTM architecture – gates overview,"1. What purpose do the gates in LSTM (input, forget, output) serve?"
+,2. How does the forget gate control memory flow?
+,3. Why does the cell state enable long-term memory retention?
+Slide: LSTM cell – internal computation,1. How is the candidate cell state computed inside an LSTM?
+,2. Why are sigmoid and tanh both used within LSTM operations?
+,3. How does the LSTM update its hidden state?
+Slide: Autoencoders – core idea,1. What is the purpose of an autoencoder?
+,2. How does the encoder compress information into a latent representation?
+,3. Why does the decoder reconstruct the input from the latent code?
+Slide: Denoising autoencoders,1. Why do denoising autoencoders intentionally corrupt input data?
+,2. How does reconstructing clean data improve robustness?
+,3. What types of noise can be used during training?
+Slide: Variational autoencoders (VAE) – intuition,1. How does a VAE differ from a standard autoencoder?
+,2. Why does VAE model the latent space probabilistically?
+,3. What meaningful structure does VAE learn in the latent space?
+Slide: VAE – KL divergence and reconstruction loss,1. Why does a VAE include both reconstruction loss and KL divergence in its objective?
+,2. What does KL divergence measure between two distributions?
+,3. Why does balancing these losses create a meaningful latent space?
+Slide: VAE – sampling and generation,1. How does sampling from the latent space allow a VAE to generate new data?
+,2. Why is a smooth latent space important for meaningful interpolation?
+,3. What types of applications commonly use VAEs for generation?
+Slide: GANs – motivation,1. Why were GANs introduced as an alternative to autoencoders and VAEs?
+,2. What kind of data do GANs typically generate?
+,3. How does adversarial training improve generation quality?
+Slide: GAN architecture – generator and discriminator,1. What is the role of the generator in a GAN?
+,2. How does the discriminator help guide the generator’s learning?
+,3. Why is the interaction between the two networks described as adversarial?
+Slide: GAN training – min-max objective,1. What is the min-max optimization problem that GANs solve?
+,2. Why does the generator try to fool the discriminator?
+,3. What happens when the discriminator becomes too strong?
+Slide: GAN issues – mode collapse,1. What is mode collapse in GAN training?
+,2. Why does the generator produce limited diversity in mode collapse?
+,3. What strategies can help reduce mode collapse?
+Slide: GAN applications – examples,1. What are common applications of GANs in computer vision?
+,2. Why are GANs suitable for style transfer or image-to-image tasks?
+,3. How do GANs contribute to creative AI applications?
+Slide: Optimization challenges in deep learning,1. Why are deep models harder to optimize than shallow ones?
+,2. How do non-convex loss surfaces affect optimization?
+,3. What issues arise from saddle points or flat regions?
+Slide: Learning rate scheduling,1. Why is adjusting the learning rate during training beneficial?
+,2. What is the purpose of learning rate decay?
+,3. How do warm restarts or cyclic learning rates help optimization?
+Slide: Batch normalization – motivation,1. What problem does batch normalization aim to solve?
+,2. How does batch norm stabilize the distribution of activations?
+,3. Why does batch norm often speed up training?
+Slide: Batch normalization – effects,1. How does batch normalization reduce internal covariate shift?
+,2. Why does batch norm act as a form of regularization?
+,3. What improvements does batch norm bring to deep networks?
+Slide: Dropout – concept revisited,1. Why does dropout randomly deactivate neurons during training?
+,2. How does dropout prevent co-adaptation between neurons?
+,3. What happens during inference when dropout is disabled?
+Slide: Weight initialization – importance,1. Why is proper weight initialization crucial for deep learning?
+,2. How can poor initialization hurt gradient flow?
+,3. What initialization methods are commonly used?
+Slide: Xavier and He initialization,1. What problem does Xavier initialization attempt to solve?
+,2. Why is He initialization preferred for ReLU networks?
+,3. How do these methods maintain stable variance?
+Slide: RNN vs LSTM comparison,1. What limitations do basic RNNs have that LSTMs overcome?
+,2. How do gating mechanisms improve memory handling in LSTMs?
+,3. Why are LSTMs preferred for long-sequence modeling?
+Slide: GRU – simplified gated architecture,1. How does a GRU differ from an LSTM in terms of gate structure?
+,2. Why is the GRU considered computationally simpler?
+,3. What tasks are GRUs commonly used for?
+Slide: Attention mechanism – core intuition,1. Why does attention focus on the most relevant parts of an input sequence?
+,2. How does attention improve long-range dependency modeling?
+,3. What advantage does attention have over RNNs?
+"Slide: Self-attention – key, query, value","1. What roles do key, query, and value vectors play in self-attention?"
+,2. How is attention weight computed between tokens?
+,3. Why does self-attention allow parallel computation?
+Slide: Transformers – architecture overview,1. What makes transformers different from RNN-based architectures?
+,2. Why do transformers rely heavily on self-attention mechanisms?
+,3. How does positional encoding preserve sequence order?
+Slide: Positional encoding – purpose,1. Why do transformers require positional encodings?
+,2. How do sinusoidal encodings represent relative positions?
+,3. Why is position information necessary in self-attention?
+Slide: Multi-head attention,1. Why do transformers use multiple attention heads?
+,2. How does each head capture different relationships?
+,3. What benefit does concatenating multiple heads provide?
+Slide: Feed-forward network in transformers,1. What role does the feed-forward layer play after attention?
+,2. Why is it applied to each token independently?
+,3. How does it increase the model’s expressive capacity?
+Slide: Encoder–decoder transformer structure,1. How do encoder layers transform the input sequence?
+,2. What role do decoder layers play during generation?
+,3. Why does cross-attention connect encoder outputs to decoder inputs?
+Slide: Training transformers – teacher forcing,1. What is teacher forcing in transformer training?
+,2. Why does feeding ground-truth tokens improve training stability?
+,3. What issues can occur if teacher forcing is not used?
+Slide: Masked attention,1. Why is masking necessary in decoder self-attention?
+,2. How does masking prevent information leakage from future tokens?
+,3. Why is masking not required in the encoder?
+Slide: Pre-training and fine-tuning paradigm,1. Why do modern ML models rely on pre-training followed by fine-tuning?
+,2. How does pre-training on large corpora improve downstream performance?
+,3. Why is fine-tuning efficient compared to training from scratch?
+Slide: Transfer learning – concept,1. What is transfer learning in machine learning?
+,2. Why does transferring knowledge reduce training requirements?
+,3. What types of tasks benefit most from transfer learning?
+Slide: Large models and scaling laws,1. How does model performance scale with more parameters?
+,2. Why does more data often unlock additional model capacity?
+,3. What limitations arise when scaling models indefinitely?
+Slide: Ethics in machine learning – fairness,1. Why is fairness an important consideration in ML systems?
+,2. How can biased training data lead to unfair outcomes?
+,3. What methods help detect or reduce bias?
+Slide: Responsible AI – transparency and interpretability,1. Why do ML systems require transparency for trust?
+,2. How does interpretability help stakeholders understand model decisions?
+,3. Why is black-box behavior a challenge in real-world deployment?
+Slide: Model evaluation – train/validation/test split,"1. Why do we divide data into separate train, validation, and test sets?"
+,2. How does the validation set help in choosing hyperparameters?
+,3. Why must the test set remain untouched during model development?
+Slide: Hyperparameters vs parameters,1. What distinguishes hyperparameters from model parameters?
+,2. Why must hyperparameters be tuned externally rather than learned?
+,3. What are examples of common hyperparameters in ML models?
+Slide: Hyperparameter tuning – grid search,1. What is grid search and how does it explore hyperparameter space?
+,2. Why can grid search become computationally expensive?
+,3. For what types of problems is grid search still useful?
+Slide: Hyperparameter tuning – random search,1. How does random search differ from grid search?
+,2. Why does random search often find good hyperparameters faster?
+,3. What advantage does random sampling give in high-dimensional spaces?
+Slide: Cross-validation – k-fold,1. What problem does k-fold cross-validation solve?
+,2. How does splitting data into k folds improve reliability of evaluation?
+,3. Why is cross-validation useful for small datasets?
+Slide: Bias in evaluation – data leakage,1. What is data leakage in machine learning?
+,2. Why does leakage cause overly optimistic evaluation results?
+,3. What are common sources of data leakage?
+Slide: Feature engineering – motivation,1. Why is feature engineering important for classical ML models?
+,2. How can good features improve model performance more than complex algorithms?
+,3. What challenges arise from manual feature design?
+Slide: Feature scaling – normalization and standardization,1. Why do many ML algorithms require scaled features?
+,2. What is the difference between normalization and standardization?
+,3. How does scaling help gradient-based optimization?
+Slide: One-hot encoding – categorical variables,1. Why can’t categorical variables be fed directly into most ML models?
+,2. How does one-hot encoding represent categories numerically?
+,3. What drawback does high-cardinality encoding introduce?
+Slide: Regularization – motivation,1. Why do models with many parameters require regularization?
+,2. How does regularization help reduce overfitting?
+,3. What is the trade-off introduced by regularization?
+,
+Slide: L1 vs L2 regularization,1. How does L1 regularization encourage sparsity in models?
+,2. Why does L2 regularization shrink weights smoothly rather than eliminating them?
+,3. How do these two techniques influence model complexity?
+Slide: Ensemble methods – boosting vs bagging,1. How does bagging reduce variance compared to boosting?
+,2. Why does boosting focus sequentially on hard-to-classify examples?
+,3. What types of errors do bagging and boosting each address?
+Slide: Gradient boosting – idea,1. What is the main intuition behind gradient boosting?
+,2. Why does each model in gradient boosting correct the errors of the previous model?
+,3. What types of base learners are commonly used?
+Slide: XGBoost – improvements over basic boosting,1. What enhancements make XGBoost faster than traditional boosting?
+,2. Why does XGBoost include regularization in its objective function?
+,3. What role does parallelization play in XGBoost performance?
+Slide: LightGBM – leaf-wise growth,1. How does LightGBM differ structurally from XGBoost?
+,2. Why does leaf-wise tree growth accelerate learning?
+,3. What is a potential downside of aggressive leaf-wise splitting?
+Slide: CatBoost – handling categorical features,1. Why is CatBoost well-suited for datasets with many categorical variables?
+,2. How does CatBoost reduce prediction shift and overfitting?
+,3. Why does ordered boosting help stabilize training?
+Slide: Parameter initialization – impact on convergence,1. Why does improper weight initialization slow down convergence?
+,2. How does initialization affect the magnitude of activations?
+,3. Why does good initialization help avoid vanishing/exploding gradients?
+Slide: Optimization – momentum,1. How does momentum accelerate gradient descent?
+,2. Why does momentum help reduce oscillations in narrow valleys?
+,3. What is the role of the momentum coefficient?
+Slide: Optimization – RMSProp,1. How does RMSProp adapt learning rates for each parameter?
+,2. Why does RMSProp help with noisy gradients?
+,3. What is the purpose of the moving average in RMSProp?
+Slide: Optimization – Adam,1. How does Adam combine momentum and RMSProp?
+,2. Why is Adam widely used for training deep networks?
+,3. What effect do Adam’s adaptive learning rates have on convergence?
+Slide: Learning dynamics – loss curves,1. How do training and validation loss curves reveal overfitting?
+,2. Why does divergence between curves indicate poor generalization?
+,3. What does steadily decreasing training loss but increasing validation loss mean?
+Slide: Early stopping signals,1. When does early stopping detect that further training is harmful?
+,2. Why is patience an important hyperparameter for early stopping?
+,3. How does early stopping save computational resources?
+Slide: Data augmentation – purpose,1. Why is data augmentation useful for improving generalization?
+,2. How does augmentation synthetically increase dataset size?
+,3. What types of transformations are commonly applied in augmentation?
+Slide: CNN augmentation techniques,1. How do flips or rotations affect CNN learning robustness?
+,2. Why does random cropping improve spatial invariance?
+,3. What risk occurs if augmentations distort semantics too much?
+Slide: Transfer learning – fine-tuning pre-trained CNNs,1. Why does transfer learning reduce required training data?
+,2. Why are early layers of CNNs often kept frozen during fine-tuning?
+,3. When is full network fine-tuning preferred?
+Slide: Domain adaptation – concept,1. What problem does domain adaptation attempt to solve?
+,2. Why do models trained on one domain perform poorly on another?
+,3. What techniques align source and target distributions?
+Slide: Explainability – saliency maps,1. How do saliency maps help interpret CNN decisions?
+,2. Why is gradient information useful for understanding feature importance?
+,3. What limitations do saliency maps have?
+Slide: SHAP values – model interpretability,1. What do SHAP values represent in terms of feature contribution?
+,2. Why do SHAP values help improve transparency in ML models?
+,3. For what types of models are SHAP explanations commonly used?
+Slide: Model deployment – challenges,1. Why is deploying ML models in production often difficult?
+,2. How do hardware constraints impact deployment?
+,3. What challenges arise from model drift over time?
+Slide: Model serving – batch vs real-time inference,1. What distinguishes batch inference from real-time inference?
+,2. Why is latency a major constraint for real-time model serving?
+,3. What types of applications typically require real-time predictions?
+Slide: Model monitoring – drift detection,1. Why must deployed ML models be monitored for drift?
+,2. How does data drift differ from concept drift?
+,3. What signals indicate that a model may need retraining?
+Slide: Data pipelines – preprocessing,1. Why are data preprocessing pipelines important in ML systems?
+,2. How do pipelines help maintain consistency between training and inference?
+,3. What preprocessing steps commonly appear in ML pipelines?
+Slide: Feature store – purpose,1. What is the purpose of a feature store in production ML workflows?
+,2. Why is maintaining consistent feature definitions important?
+,3. How does a feature store enable feature reuse across models?
+Slide: Online vs offline features,1. What is the difference between online and offline feature computation?
+,2. Why must online features be generated with low latency?
+,3. What risks arise if online features do not match training features?
+Slide: Data versioning – need for reproducibility,1. Why is data versioning critical for ML experiments?
+,2. How does version control help diagnose performance regressions?
+,3. Why must training datasets be immutable once a model is deployed?
+Slide: ML experiment tracking – metrics and artifacts,1. Why do ML teams track experiments with metrics and artifacts?
+,2. What types of artifacts typically need to be stored?
+,3. How does experiment tracking support reproducibility?
+Slide: Evaluation metrics – precision and recall,1. Why can accuracy be misleading for imbalanced datasets?
+,2. How does precision measure the correctness of positive predictions?
+,3. Why does recall measure the ability to detect all positive cases?
+Slide: F1 score – harmonic mean,1. Why is the F1 score defined as the harmonic mean of precision and recall?
+,2. What scenario makes F1 a more reliable metric than accuracy?
+,3. How does F1 balance the trade-off between precision and recall?
+Slide: ROC and AUC – concept,1. What does the ROC curve plot?
+,2. Why is AUC used as a threshold-independent measure?
+,3. What indicates a poor classifier on an ROC curve?
+Slide: Confusion matrix – interpretation,1. What four types of outcomes does a confusion matrix represent?
+,2. How does the confusion matrix help diagnose classification errors?
+,3. Why is it important for evaluating imbalanced classes?
+Slide: Multi-class classification – one-vs-rest,1. How does the one-vs-rest strategy handle multi-class problems?
+,2. Why does it require training multiple binary classifiers?
+,3. What limitation does one-vs-rest have with highly overlapping classes?
+Slide: Multi-class classification – softmax output,1. Why do neural networks use softmax for multi-class predictions?
+,2. How does softmax convert logits into probability distributions?
+,3. Why must probabilities sum to 1?
+Slide: Class imbalance – oversampling,1. How does oversampling help address class imbalance?
+,2. Why can naive oversampling lead to overfitting?
+,3. What methods generate synthetic examples to balance classes?
+Slide: Class imbalance – undersampling,1. What risk does undersampling pose for majority classes?
+,2. Why can undersampling improve training time?
+,3. In what scenario is undersampling preferred?
+Slide: Cost-sensitive learning,1. How does cost-sensitive learning assign different penalties to different types of errors?
+,2. Why is this approach useful for rare but critical classes?
+,3. What applications commonly use cost-sensitive models?
+Slide: Imbalanced metrics – precision–recall curves,1. Why do PR curves give better insight than ROC curves for imbalanced datasets?
+,2. What does the area under a PR curve represent?
+,3. Why does high recall with low precision indicate many false positives?
+Slide: Clustering evaluation – silhouette score,1. Why is clustering evaluation harder without labels?
+,2. What does the silhouette score measure?
+,3. Why does a higher silhouette score indicate well-separated clusters?
+Slide: Clustering evaluation – inertia,1. What does inertia represent in k-means clustering?
+,2. Why does lower inertia usually indicate tighter clusters?
+,3. What problem arises when using inertia alone to select k?
+Slide: Elbow method – choosing k,1. How does the elbow method help determine the number of clusters?
+,2. What visual pattern indicates the “elbow” point?
+,3. Why doesn’t elbow method always produce a clear answer?
+Slide: Hierarchical clustering – idea,1. What distinguishes hierarchical clustering from k-means?
+,2. How does agglomerative clustering build a hierarchy?
+,3. Why is the dendrogram useful for inspecting cluster structure?
+Slide: Distance metrics – Euclidean vs cosine,1. How does Euclidean distance differ from cosine similarity?
+,2. Why is cosine similarity useful for high-dimensional sparse data?
+,3. What effect does distance choice have on clustering results?
+Slide: Dimensionality reduction – t-SNE,1. Why is t-SNE suited for visualizing high-dimensional data?
+,2. How does t-SNE preserve local neighborhood structure?
+,3. Why is t-SNE not ideal for large-scale clustering?
+Slide: Dimensionality reduction – UMAP,1. What advantage does UMAP have over t-SNE in preserving global structure?
+,2. Why is UMAP often faster than t-SNE?
+,3. What applications commonly use UMAP embeddings?
+Slide: Recommender systems – collaborative filtering,1. How does collaborative filtering use user–item interactions?
+,2. Why does it perform well even without item metadata?
+,3. What is the cold-start problem in recommender systems?
+Slide: Recommender systems – content-based filtering,1. How does content-based filtering represent items?
+,2. Why does it avoid the cold-start issue for new users?
+,3. What limits the diversity of recommendations in this approach?
+Slide: Matrix factorization – latent factors,1. How does matrix factorization represent users and items in latent space?
+,2. Why do latent factors help uncover hidden preferences?
+,3. How does factorization handle sparse interaction matrices?
+Slide: Reinforcement learning – Markov decision process (MDP),1. What components define a Markov decision process?
+,2. Why is the Markov property important in RL?
+,3. How does the transition function influence agent behavior?
+Slide: Reinforcement learning – reward functions,1. Why is the reward function central to RL algorithms?
+,2. How does reward shaping influence agent learning?
+,3. What issues occur when rewards are sparse?
+Slide: Exploration vs exploitation – ε-greedy,1. Why must RL agents balance exploration and exploitation?
+,2. How does the ε-greedy strategy encourage exploration?
+,3. What happens when ε is set too high or too low?
+Slide: Model serving – batch vs real-time inference,1. What distinguishes batch inference from real-time inference?
+,2. Why is latency a major constraint for real-time model serving?
+,3. What types of applications typically require real-time predictions?
+Slide: Model monitoring – drift detection,1. Why must deployed ML models be monitored for drift?
+,2. How does data drift differ from concept drift?
+,3. What signals indicate that a model may need retraining?
+Slide: Data pipelines – preprocessing,1. Why are data preprocessing pipelines important in ML systems?
+,2. How do pipelines help maintain consistency between training and inference?
+,3. What preprocessing steps commonly appear in ML pipelines?
+Slide: Feature store – purpose,1. What is the purpose of a feature store in production ML workflows?
+,2. Why is maintaining consistent feature definitions important?
+,3. How does a feature store enable feature reuse across models?
+Slide: Online vs offline features,1. What is the difference between online and offline feature computation?
+,2. Why must online features be generated with low latency?
+,3. What risks arise if online features do not match training features?
+Slide: Data versioning – need for reproducibility,1. Why is data versioning critical for ML experiments?
+,2. How does version control help diagnose performance regressions?
+,3. Why must training datasets be immutable once a model is deployed?
+Slide: ML experiment tracking – metrics and artifacts,1. Why do ML teams track experiments with metrics and artifacts?
+,2. What types of artifacts typically need to be stored?
+,3. How does experiment tracking support reproducibility?
+Slide: Evaluation metrics – precision and recall,1. Why can accuracy be misleading for imbalanced datasets?
+,2. How does precision measure the correctness of positive predictions?
+,3. Why does recall measure the ability to detect all positive cases?
+Slide: F1 score – harmonic mean,1. Why is the F1 score defined as the harmonic mean of precision and recall?
+,2. What scenario makes F1 a more reliable metric than accuracy?
+,3. How does F1 balance the trade-off between precision and recall?
+Slide: ROC and AUC – concept,1. What does the ROC curve plot?
+,2. Why is AUC used as a threshold-independent measure?
+,3. What indicates a poor classifier on an ROC curve?
+Slide: Confusion matrix – interpretation,1. What four types of outcomes does a confusion matrix represent?
+,2. How does the confusion matrix help diagnose classification errors?
+,3. Why is it important for evaluating imbalanced classes?
+Slide: Multi-class classification – one-vs-rest,1. How does the one-vs-rest strategy handle multi-class problems?
+,2. Why does it require training multiple binary classifiers?
+,3. What limitation does one-vs-rest have with highly overlapping classes?
+Slide: Multi-class classification – softmax output,1. Why do neural networks use softmax for multi-class predictions?
+,2. How does softmax convert logits into probability distributions?
+,3. Why must probabilities sum to 1?
+Slide: Class imbalance – oversampling,1. How does oversampling help address class imbalance?
+,2. Why can naive oversampling lead to overfitting?
+,3. What methods generate synthetic examples to balance classes?
+Slide: Class imbalance – undersampling,1. What risk does undersampling pose for majority classes?
+,2. Why can undersampling improve training time?
+,3. In what scenario is undersampling preferred?
+Slide: Cost-sensitive learning,1. How does cost-sensitive learning assign different penalties to different types of errors?
+,2. Why is this approach useful for rare but critical classes?
+,3. What applications commonly use cost-sensitive models?
+Slide: Imbalanced metrics – precision–recall curves,1. Why do PR curves give better insight than ROC curves for imbalanced datasets?
+,2. What does the area under a PR curve represent?
+,3. Why does high recall with low precision indicate many false positives?
+Slide: Clustering evaluation – silhouette score,1. Why is clustering evaluation harder without labels?
+,2. What does the silhouette score measure?
+,3. Why does a higher silhouette score indicate well-separated clusters?
+Slide: Clustering evaluation – inertia,1. What does inertia represent in k-means clustering?
+,2. Why does lower inertia usually indicate tighter clusters?
+,3. What problem arises when using inertia alone to select k?
+Slide: Elbow method – choosing k,1. How does the elbow method help determine the number of clusters?
+,2. What visual pattern indicates the “elbow” point?
+,3. Why doesn’t elbow method always produce a clear answer?
+Slide: Hierarchical clustering – idea,1. What distinguishes hierarchical clustering from k-means?
+,2. How does agglomerative clustering build a hierarchy?
+,3. Why is the dendrogram useful for inspecting cluster structure?
+Slide: Distance metrics – Euclidean vs cosine,1. How does Euclidean distance differ from cosine similarity?
+,2. Why is cosine similarity useful for high-dimensional sparse data?
+,3. What effect does distance choice have on clustering results?
+Slide: Dimensionality reduction – t-SNE,1. Why is t-SNE suited for visualizing high-dimensional data?
+,2. How does t-SNE preserve local neighborhood structure?
+,3. Why is t-SNE not ideal for large-scale clustering?
+Slide: Dimensionality reduction – UMAP,1. What advantage does UMAP have over t-SNE in preserving global structure?
+,2. Why is UMAP often faster than t-SNE?
+,3. What applications commonly use UMAP embeddings?
+Slide: Recommender systems – collaborative filtering,1. How does collaborative filtering use user–item interactions?
+,2. Why does it perform well even without item metadata?
+,3. What is the cold-start problem in recommender systems?
+Slide: Recommender systems – content-based filtering,1. How does content-based filtering represent items?
+,2. Why does it avoid the cold-start issue for new users?
+,3. What limits the diversity of recommendations in this approach?
+Slide: Matrix factorization – latent factors,1. How does matrix factorization represent users and items in latent space?
+,2. Why do latent factors help uncover hidden preferences?
+,3. How does factorization handle sparse interaction matrices?
+Slide: Reinforcement learning – Markov decision process (MDP),1. What components define a Markov decision process?
+,2. Why is the Markov property important in RL?
+,3. How does the transition function influence agent behavior?
+Slide: Reinforcement learning – reward functions,1. Why is the reward function central to RL algorithms?
+,2. How does reward shaping influence agent learning?
+,3. What issues occur when rewards are sparse?
+Slide: Exploration vs exploitation – ε-greedy,1. Why must RL agents balance exploration and exploitation?
+,2. How does the ε-greedy strategy encourage exploration?
+,3. What happens when ε is set too high or too low?
+Slide: Q-learning – value function,1. What does Q-learning aim to learn through interaction with the environment?
+,2. How does the Q-value represent future expected reward?
+,3. Why does Q-learning not require a model of the environment?
+Slide: Q-learning update rule,1. What role does the learning rate play in the Q-learning update?
+,2. Why does the update use the maximum Q-value of the next state?
+,3. How does discount factor γ influence future rewards?
+Slide: Deep Q-networks (DQN) – concept,1. Why are deep networks used in DQN to approximate the Q-function?
+,2. How does DQN enable RL in large state spaces?
+,3. Why was DQN a breakthrough for Atari game performance?
+Slide: DQN – experience replay,1. Why does DQN use replay memory?
+,2. How does sampling past experiences improve training stability?
+,3. Why does replay reduce correlation between consecutive samples?
+Slide: Target network in DQN,1. Why does DQN use a separate target network during training?
+,2. How does the target network reduce oscillations?
+,3. Why is periodic updating of the target network beneficial?
+Slide: Policy gradients – intuition,1. Why do policy gradient methods optimize policies directly?
+,2. How does sampling actions from a policy enable learning?
+,3. What advantage do policy gradients have over value-based methods?
+Slide: REINFORCE algorithm,1. Why does REINFORCE multiply returns with log probabilities?
+,2. Why does the algorithm require episodes to finish before updates?
+,3. What issue arises due to high variance gradients?
+Slide: Actor–critic architecture,1. How does the actor–critic method combine value-based and policy-based ideas?
+,2. Why does the critic reduce variance in policy gradient updates?
+,3. How does the actor use feedback from the critic?
+Slide: PPO – Proximal Policy Optimization,1. Why does PPO restrict the size of policy updates?
+,2. What advantage does the clipping objective provide?
+,3. Why is PPO widely used in modern reinforcement learning?
+Slide: Robotics and RL – control loop,1. How does RL fit into the robot control loop?
+,2. Why is simulation often necessary before real-world execution?
+,3. What challenges arise from real-world robot environments?
+Slide: Computer vision – object detection,1. How does object detection differ from classification?
+,2. What does a bounding box represent in detection tasks?
+,3. Why do detectors need both localization and classification?
+Slide: CNN-based detectors – YOLO intuition,1. Why is YOLO considered a single-shot detector?
+,2. How does YOLO predict bounding boxes and class probabilities together?
+,3. What trade-off makes YOLO extremely fast?
+Slide: R-CNN vs YOLO – comparison,1. Why does R-CNN use region proposals before classification?
+,2. How does YOLO eliminate the need for region proposals?
+,3. What performance differences exist between the two approaches?
+Slide: Semantic segmentation – idea,1. How does semantic segmentation differ from object detection?
+,2. Why is pixel-level labeling important for certain tasks?
+,3. What applications commonly require semantic segmentation?
+Slide: U-Net architecture – encoder–decoder,1. Why does U-Net use a symmetric encoder–decoder structure?
+,2. How do skip connections help preserve spatial details?
+,3. Why is U-Net effective even with limited training data?
+Slide: NLP – bag-of-words model,1. How does the bag-of-words model represent text numerically?
+,2. Why does BOW ignore word order?
+,3. What limitations arise from sparse high-dimensional vectors?
+Slide: NLP – word embeddings,1. Why do word embeddings provide dense vector representations?
+,2. How do embeddings capture semantic relationships?
+,3. Why are embeddings better than one-hot encoding?
+Slide: Word2Vec – skip-gram intuition,1. What is the goal of the skip-gram model in Word2Vec?
+,2. How does predicting context words help learn embeddings?
+,3. Why does skip-gram handle rare words better than CBOW?
+Slide: Word2Vec – CBOW,1. How does CBOW predict the target word from surrounding context?
+,2. Why is CBOW faster to train than skip-gram?
+,3. What weaknesses does CBOW have compared to skip-gram?
+Slide: GloVe – global co-occurrence,1. What type of information does GloVe use to learn embeddings?
+,2. Why do global statistics help produce meaningful embeddings?
+,3. How is GloVe different from Word2Vec?
+Slide: NLP – RNNs for language modeling,1. Why are RNNs used for predicting the next word in a sequence?
+,2. How does hidden state store language context?
+,3. What weakness prevents RNNs from modeling long-range dependencies?
+Slide: Attention in NLP,1. How does attention allow models to focus on important words?
+,2. Why does attention outperform RNNs for long sentences?
+,3. What role does weighted context play in attention mechanisms?
+Slide: Transformer encoder – NLP tasks,1. Why do transformer encoders excel at classification and embeddings?
+,2. How does self-attention capture word dependencies without recurrence?
+,3. What makes transformers scale effectively with data?
+Slide: Text classification – pipeline,1. What steps make up a typical text classification pipeline?
+,2. Why are embeddings essential before applying classifiers?
+,3. How does fine-tuning pre-trained models improve accuracy?
+Slide: Sequence-to-sequence learning – overview,1. Why do seq2seq models require both encoder and decoder?
+,2. How does the encoder compress the input sequence?
+,3. What role does the decoder play during generation?
+Slide: Machine translation – encoder–decoder,1. Why is machine translation a natural application for seq2seq models?
+,2. How do attention mechanisms enhance translation quality?
+,3. Why does the decoder generate text one token at a time?
+Slide: Beam search – decoding strategy,1. Why is greedy decoding suboptimal for many generation tasks?
+,2. How does beam search explore multiple candidate sequences?
+,3. What is the trade-off between beam width and computation cost?
+Slide: Text generation – temperature control,1. How does temperature affect randomness in text generation?
+,2. Why does low temperature lead to more predictable outputs?
+,3. How does high temperature increase creativity and diversity?
+Slide: Evaluation of NLP models – BLEU score,1. Why is BLEU score widely used to evaluate machine translation?
+,2. What does comparing n-grams reveal about translation quality?
+,3. Why does BLEU not perfectly reflect human judgment?
+Slide: Speech recognition – overview,1. What makes speech recognition a sequence-to-sequence task?
+,2. Why is converting audio signals into text challenging?
+,3. How do acoustic and language models contribute to ASR?
+Slide: CTC loss – intuition,1. Why does CTC loss allow alignment-free sequence training?
+,2. How does CTC handle variable-length inputs and outputs?
+,3. Why are blank tokens important in CTC?
+Slide: Speech features – MFCCs,1. Why are MFCCs widely used as features in speech recognition?
+,2. How do MFCCs represent the spectral characteristics of audio?
+,3. Why does using the Mel scale make MFCCs perceptually meaningful?
+Slide: Audio preprocessing – spectrograms,1. What does a spectrogram show about an audio signal?
+,2. Why does converting audio to time–frequency representation help ML models?
+,3. What role does window size play in spectrogram clarity?
+Slide: Sequence modeling in audio – RNN/CNN hybrids,1. Why do some ASR models combine convolutional layers with RNNs?
+,2. How do convolutions help extract local temporal features?
+,3. Why do recurrent layers help with long-term temporal context?
+Slide: CTC vs attention models in ASR,1. What is the main difference between CTC-based and attention-based ASR?
+,2. Why does CTC not require explicit alignment?
+,3. How does attention improve handling of long utterances?
+Slide: Autoencoders in speech enhancement,1. How can autoencoders remove noise from speech signals?
+,2. What part of the autoencoder focuses on reconstructing clean audio?
+,3. Why does compression in the latent space help denoising?
+Slide: ML for anomaly detection – overview,1. Why is anomaly detection used for rare or unusual patterns?
+,2. What challenges arise due to limited positive examples?
+,3. Why are reconstruction-based methods useful for anomalies?
+Slide: Statistical anomaly detection – z-score,1. How does the z-score measure deviation from the mean?
+,2. Why is z-score useful for detecting numeric anomalies?
+,3. What assumption about data distribution does z-score rely on?
+Slide: Distance-based anomaly detection – kNN,1. Why do distance-based methods detect anomalies based on isolation?
+,2. How does kNN measure abnormality in feature space?
+,3. What limitations occur in very high-dimensional data?
+Slide: Isolation Forest – anomaly detection,1. Why does Isolation Forest isolate points using random splits?
+,2. Why do anomalies require fewer splits to isolate?
+,3. What advantage does Isolation Forest have for large datasets?
+Slide: Time series ML – forecasting,1. Why do time series models require temporal ordering?
+,2. How does autocorrelation help in forecasting future values?
+,3. Why is stationarity important in classical forecasting models?
+Slide: ARIMA – components,"1. What do the AR, I, and MA components represent in ARIMA?"
+,2. Why does differencing help achieve stationarity?
+,3. What types of data are suited for ARIMA modeling?
+Slide: LSTM for time-series prediction,1. Why are LSTMs preferred over simple RNNs for time-series tasks?
+,2. How do LSTM gates help model long-term temporal patterns?
+,3. What benefit does sequence memory offer for forecasting?
+Slide: Convolution for time series,1. Why are 1D convolutions useful for sequence modeling?
+,2. How do temporal filters extract local patterns?
+,3. What advantages do CNN-based forecasters have over RNNs?
+Slide: Hybrid time-series models – CNN+LSTM,1. Why do some architectures combine CNNs and LSTMs?
+,2. How do CNN layers compress local features before the LSTM?
+,3. What tasks benefit from hybrid time-series modeling?
+Slide: Clustering time series,1. Why is time-series clustering more complex than standard clustering?
+,2. How does dynamic time warping (DTW) improve similarity comparison?
+,3. What applications require clustering of temporal patterns?
+Slide: Dimensionality reduction for time series,1. How can PCA be applied to multivariate time-series data?
+,2. Why does dimensionality reduction help visualization?
+,3. What risk arises when reducing dimensions too aggressively?
+Slide: ML in finance – risk prediction,1. Why is ML used for credit risk and fraud detection?
+,2. How does class imbalance affect financial datasets?
+,3. What metrics are more appropriate than accuracy in these cases?
+Slide: ML in healthcare – diagnosis models,1. Why is interpretability important in healthcare ML models?
+,2. How does class imbalance impact disease detection performance?
+,3. What validation challenges exist with medical datasets?
+Slide: ML in autonomous vehicles – perception,1. What perception tasks must autonomous vehicles perform?
+,2. Why do AV systems require high-accuracy vision models?
+,3. How are object detection and segmentation used in AV pipelines?
+Slide: ML in autonomous vehicles – decision making,1. How does reinforcement learning assist in driving policy decisions?
+,2. Why must decision-making systems consider safety constraints?
+,3. How does uncertainty affect autonomous driving actions?
+Slide: Federated learning – concept,1. Why does federated learning allow training without sharing raw data?
+,2. How do local model updates contribute to global training?
+,3. What privacy benefits arise from decentralizing training?
+Slide: Federated learning – challenges,1. Why does heterogeneous client data make federated learning difficult?
+,2. How does unreliable network connectivity affect training?
+,3. Why must aggregation methods handle non-IID data?
+Slide: Differential privacy – ML,1. Why is differential privacy used to protect sensitive data?
+,2. How does adding noise preserve privacy while retaining utility?
+,3. Why is the privacy budget crucial in DP systems?
+Slide: Fairness metrics – demographic parity,1. What does demographic parity measure in ML fairness?
+,2. Why can enforcing demographic parity conflict with accuracy?
+,3. What limitations arise when base rates differ between groups?
+Slide: Fairness metrics – equalized odds,1. How does equalized odds define fairness among groups?
+,2. Why does it require equal false positive and false negative rates?
+,3. What challenges occur when enforcing equalized odds?
+Slide: Explainability – LIME,1. How does LIME create local explanations around a prediction?
+,2. Why does perturbation of inputs help understand model behavior?
+,3. What limitations does LIME have for complex models?
+Slide: Interpretability – partial dependence plots,1. Why do PDPs show how a feature influences model predictions? 
+,2. What assumption does PDP make about feature independence?
+,3. When do PDPs become misleading?
+Slide: Robust ML – adversarial examples,1. What are adversarial examples in machine learning?
+,2. Why are small perturbations enough to fool deep models?
+,3. How does adversarial training improve robustness?
+Slide: Robust ML – defense strategies,1. What types of defenses attempt to reduce adversarial vulnerability?
+,2. Why do input preprocessing methods offer limited protection?
+,3. What challenges prevent perfect robustness?
+Slide: ML system lifecycle – end-to-end view,1. What stages form the complete ML system lifecycle?
+,2. Why is continuous monitoring essential after deployment?
+,3. How do data quality issues impact the ML pipeline?
+Slide: ML system design – data collection,1. Why is high-quality data crucial for ML system design?
+,2. How does poor data collection lead to biased or weak models?
+,3. What strategies help ensure representative data?
+Slide: ML system design – labeling,1. Why is consistent labeling important for supervised learning?
+,2. What risks arise from ambiguous or inconsistent labels?
+,3. How can labeling guidelines improve dataset quality?
+Slide: Human-in-the-loop ML,1. Why do some ML systems require human feedback during training?
+,2. How does human review improve data quality?
+,3. What tasks benefit most from human-in-the-loop workflows?
+Slide: Data augmentation – tabular data,1. Why is tabular data augmentation more difficult than image augmentation?
+,2. What techniques create synthetic rows while preserving structure?
+,3. Why must augmented rows avoid unrealistic combinations?
+Slide: Model interpretability – global vs local,1. How does global interpretability differ from local interpretability?
+,2. Why is local interpretation important for individual predictions?
+,3. Why do complex models require explainability tools?
+Slide: Counterfactual explanations,1. What is a counterfactual explanation in ML?
+,2. How do counterfactuals show minimal changes needed for a different outcome?
+,3. Why are counterfactuals useful for fairness and transparency?
+Slide: Model compression – quantization,1. How does quantization reduce model size? 
+,2. Why does reducing numerical precision speed up inference? 
+,3. What risks does quantization pose for model accuracy?
+Slide: Model compression – pruning,1. Why does pruning remove unimportant weights or neurons? 
+,2. How does pruning reduce computational cost? 
+,3. What strategies determine which weights to prune?
+Slide: Knowledge distillation,1. How does knowledge distillation transfer knowledge from a large model to a smaller one?
+, 2. Why do soft targets contain more information than hard labels? 
+,3. What are typical use cases for distilled models?
+Slide: Edge device ML – constraints,1. Why must ML models deployed on edge devices be lightweight? 
+,2. What hardware limitations affect model size and speed? 
+,3. Why is power consumption a major constraint?
+Slide: Real-time detection – latency challenges,1. Why is latency critical for real-time detection systems? 
+,2. How does batching affect latency in real-time inference? 
+,3. What optimizations help reduce endpoint response times?
+Slide: Distributed training – data parallelism,1. How does data parallelism split training across multiple GPUs? 
+,2. Why does synchronizing gradients ensure consistent updates? 
+,3. What bottlenecks arise in large-scale distributed training?
+Slide: Distributed training – model parallelism,1. Why is model parallelism needed for extremely large networks?
+, 2. How does splitting layers across devices enable training? 
+,3. What communication challenges occur in model parallelism?
+Slide: Parameter server architecture,1. What role does the parameter server play in distributed ML? 
+,2. How do workers send gradients to the parameter server? 
+,3. Why must parameter servers handle synchronization efficiently?
+Slide: Reinforcement learning – value iteration,1. How does value iteration compute optimal state values? 
+,2. Why does value iteration rely on the Bellman optimality equation? 
+,3. What condition indicates convergence of value iteration?
+Slide: Reinforcement learning – policy iteration,1. What two steps form policy iteration? 
+,2. Why does policy evaluation improve estimates of state values? 
+,3. How does policy improvement refine the policy?
+Slide: Model-based RL – planning,1. Why does model-based RL learn or use transition dynamics? 
+,2. How does planning simulate future outcomes? 
+,3. What advantage does model-based RL have over model-free methods?
+Slide: Inverse reinforcement learning,1. Why does inverse RL attempt to recover reward functions from behavior? 
+,2. How can expert demonstrations guide RL agents? 
+,3. What applications commonly use inverse RL?
+Slide: Multi-agent reinforcement learning,1. Why is multi-agent RL more complex than single-agent RL? 
+,2. How do agents influence each other’s learning process? 
+,3. What coordination challenges arise in multi-agent environments?
+Slide: Game theory in ML,1. How does game theory apply to strategic interactions between ML agents? 
+,2. Why are Nash equilibria relevant in multi-agent settings? 
+,3. What ML tasks benefit from game-theoretic reasoning?
+Slide: Graph neural networks – idea,1. Why do graph neural networks operate on graph-structured data? 
+,2. How does message passing allow nodes to share information? 
+,3. What types of tasks suit GNNs?
+Slide: GNN – node embeddings,1. Why do GNNs learn embeddings for each node?
+,2. How do embeddings capture the structure of a graph?
+,3. What downstream tasks use node embeddings?
+Slide: GNN – graph classification,1. How does pooling convert node features into graph-level features?
+,2. Why is graph classification useful for molecules or social networks?
+,3. How do hierarchical GNNs process complex graph structures?
+Slide: Reinforcement learning with GNNs,1. Why are GNNs useful for RL tasks with relational structure?
+,2. How do relational graphs represent environment states?
+,3. What advantage does structured representation give in RL?
+Slide: Meta-learning – concept,1. Why does meta-learning aim to learn how to learn?
+,2. How does meta-learning adapt quickly to new tasks?
+,3. What is a typical example of few-shot learning?
+Slide: Meta-learning – MAML,1. How does MAML train a model to adapt with minimal gradient steps?
+,2. Why does MAML rely on meta-gradients?
+,3. What applications benefit from fast task adaptation?
+Slide: Self-supervised learning – pretext tasks,1. Why does self-supervised learning avoid the need for manual labels?
+,2. What are examples of pretext tasks used in SSL?
+,3. Why does solving these tasks help learn meaningful features?
+Slide: Contrastive learning – intuition,1. Why does contrastive learning bring similar examples closer?
+,2. How do positive and negative pairs shape learned representations?
+,3. What makes contrastive learning powerful for large-scale data?
+Slide: Clustering in representation learning,1. Why do learned embeddings often form natural clusters?
+,2. How does clustering evaluate representation quality?
+,3. What tasks benefit from embedding-based clustering?
+Slide: Continual learning – concept,1. Why does continual learning aim to avoid catastrophic forgetting?
+,2. How does sequential task learning differ from standard training?
+,3. What applications require models that learn continuously over time?
+Slide: Catastrophic forgetting,1. Why do neural networks overwrite old knowledge when trained on new tasks?
+,2. How does catastrophic forgetting affect performance on earlier tasks?
+,3. What strategies help reduce catastrophic forgetting?
+Slide: Elastic Weight Consolidation (EWC),1. How does EWC slow down updates to important weights?
+,2. Why does EWC require estimating parameter importance?
+,3. How does EWC help preserve performance on previous tasks?
+Slide: Replay-based continual learning,1. Why does replay buffer old samples to prevent forgetting?
+,2. How does interleaving past and new data stabilize learning?
+,3. What limitations arise when storing past examples?
+Slide: Generative replay,1. Why does generative replay use models to synthesize old examples?
+,2. How does this approach avoid storing actual past data?
+,3. What challenges arise when generative samples are low quality?
+Slide: Lifelong learning systems,1. What distinguishes lifelong learning from single-task learning? 
+,2. Why must lifelong learning systems identify task boundaries? 
+,3. What real-world domains benefit from lifelong ML systems?
+Slide: Curriculum learning,1. How does curriculum learning organize training from easy to hard examples? 
+,2. Why does structured difficulty improve model learning? 
+,3. What tasks benefit from curriculum-based training?
+Slide: Self-training in semi-supervised learning,1. How does self-training use model predictions as pseudo-labels? 
+,2. Why is confidence thresholding important for pseudo-labeling? 
+,3. What risks arise if incorrect pseudo-labels accumulate?
+Slide: Co-training – semi-supervised,1. How does co-training use multiple views of data to improve labeling? 
+,2. Why does co-training require conditionally independent feature sets? 
+,3. What scenarios are ideal for co-training?
+Slide: Graph-based semi-supervised learning,1. Why do graph-based SSL methods propagate labels through graph structure? 
+,2. How does label propagation assign labels to unlabeled nodes? 
+,3. What assumptions must hold for graph SSL to work well?
+Slide: Multi-task learning – concept,1. Why does multi-task learning allow shared representations across tasks? 
+,2. How does jointly training multiple tasks reduce overfitting? 
+,3. What tasks commonly benefit from shared learning?
+Slide: Hard parameter sharing,1. Why does hard parameter sharing reduce model size? 
+,2. How does shared representation improve generalization across tasks? 
+,3. What limitation arises when tasks conflict?
+Slide: Soft parameter sharing,1. How does soft parameter sharing differ from hard sharing? 
+,2. Why does allowing separate parameters reduce task interference? 
+,3. How does regularization encourage tasks to learn similar features?
+Slide: Zero-shot learning,1. What makes zero-shot learning different from standard supervised learning?
+,2. How do semantic attributes enable predictions of unseen classes?
+,3. What applications rely on zero-shot capabilities?
+Slide: Few-shot learning,1. Why must few-shot learning adapt to new classes with limited data?
+,2. How do metric-learning approaches classify unseen classes?
+,3. What role do support examples play in few-shot tasks?
+Slide: Siamese networks,1. Why do Siamese networks learn similarity between pairs of examples?
+,2. How does contrastive loss train the network?
+,3. What applications commonly use Siamese architectures?
+Slide: Prototypical networks,1. How do prototypical networks compute class prototypes?
+,2. Why do distances to prototypes allow few-shot classification?
+,3. What assumptions must prototypes satisfy for good performance?
+Slide: Bayesian machine learning – overview,1. Why does Bayesian ML model uncertainty explicitly?
+,2. How do posterior distributions represent updated beliefs?
+,3. What advantages do Bayesian models have in low-data settings?
+Slide: Variational inference – idea,1. Why does variational inference approximate intractable posteriors?
+,2. How does optimizing ELBO help fit variational distributions?
+,3. How does variational inference scale to large datasets?
+Slide: Monte Carlo sampling – ML use,1. Why does Monte Carlo sampling approximate integrals in ML?
+,2. How does random sampling improve estimation accuracy?
+,3. What limitations arise when Monte Carlo requires many samples?
+Slide: Bayesian neural networks,1. How do Bayesian neural networks learn distributions over weights?
+,2. Why does uncertainty estimation improve decision-making?
+,3. What is the main drawback of Bayesian neural networks?
+Slide: Gaussian processes – intuition,1. Why do Gaussian processes define distributions over functions?
+,2. How does the kernel capture similarity between inputs?
+,3. Why are GPs computationally expensive for large datasets?
+Slide: ML reproducibility – importance,1. Why is reproducibility essential in ML research?
+,2. How do uncontrolled randomness sources affect results?
+,3. What practices improve experiment reproducibility?
+Slide: Versioning models – model registry,1. Why does a model registry help track multiple trained versions?
+,2. What metadata should be stored for each model?
+,3. How does versioning support safe deployment?
+Slide: Automation in ML – AutoML,1. How does AutoML automate hyperparameter tuning?
+,2. Why does AutoML help non-experts build ML models?
+,3. What limitations arise from automated search methods?
+Slide: Neural architecture search (NAS),1. Why does NAS explore architectures automatically?
+,2. How do search spaces define possible model structures?
+,3. Why is NAS computationally expensive?
+Slide: ML fairness – disparate impact,1. How is disparate impact measured in ML systems?
+,2. Why can high accuracy still hide unfair outcomes?
+,3. What techniques help reduce disparate impact?
+Slide: Responsible ML – model governance,1. Why do organizations need governance for ML models?
+,2. How does documenting decisions improve accountability?
+,3. What risks arise when models lack proper oversight?
+Slide: Energy efficiency in ML,1. Why is energy consumption a growing concern in ML?
+,2. How do large models contribute to carbon footprint?
+,3. What techniques help reduce energy usage during training?
+Slide: Sustainability in AI systems,1. Why must AI systems consider long-term sustainability?
+,2. How do data center practices affect environmental impact?
+,3. What design choices make AI more sustainable?

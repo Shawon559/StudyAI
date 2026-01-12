@@ -1,0 +1,2491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>StudyAI - Intelligent Learning Platform</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-dark: #0f1419;
+      --bg-card: #1a2332;
+      --bg-elevated: #243447;
+      --bg-input: #151d28;
+      --border-subtle: #334155;
+      --border-accent: #475569;
+      --text-primary: #ffffff;
+      --text-secondary: #a1a1a1;
+      --text-muted: #666666;
+
+      /* Vibrant color palette */
+      --coral: #ff6b6b;
+      --coral-glow: rgba(255, 107, 107, 0.3);
+      --teal: #4ecdc4;
+      --teal-glow: rgba(78, 205, 196, 0.3);
+      --purple: #a855f7;
+      --purple-glow: rgba(168, 85, 247, 0.3);
+      --yellow: #fbbf24;
+      --yellow-glow: rgba(251, 191, 36, 0.3);
+      --blue: #3b82f6;
+      --blue-glow: rgba(59, 130, 246, 0.3);
+      --pink: #ec4899;
+      --pink-glow: rgba(236, 72, 153, 0.3);
+      --green: #22c55e;
+      --green-glow: rgba(34, 197, 94, 0.3);
+
+      --gradient-hero: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 50%, #a855f7 100%);
+      --gradient-button: linear-gradient(135deg, #4ecdc4 0%, #a855f7 100%);
+      --gradient-coral: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+      --gradient-teal: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+      --gradient-purple: linear-gradient(135deg, #a855f7 0%, #6366f1 100%);
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(180deg, #0f1419 0%, #131a22 50%, #0f1419 100%);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Animated background */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .bg-animation .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.5;
+      animation: float 20s ease-in-out infinite;
+    }
+
+    .bg-animation .orb-1 {
+      width: 600px;
+      height: 600px;
+      background: var(--coral);
+      top: -200px;
+      left: -100px;
+      animation-delay: 0s;
+    }
+
+    .bg-animation .orb-2 {
+      width: 500px;
+      height: 500px;
+      background: var(--teal);
+      bottom: -150px;
+      right: -100px;
+      animation-delay: -7s;
+    }
+
+    .bg-animation .orb-3 {
+      width: 400px;
+      height: 400px;
+      background: var(--purple);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation-delay: -14s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(50px, -50px) scale(1.1); }
+      50% { transform: translate(-30px, 30px) scale(0.95); }
+      75% { transform: translate(-50px, -30px) scale(1.05); }
+    }
+
+    /* Navigation */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px;
+      background: linear-gradient(135deg, rgba(26, 35, 50, 0.95) 0%, rgba(15, 20, 25, 0.95) 100%);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-brand-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--gradient-hero);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 32px var(--coral-glow);
+      animation: iconPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes iconPulse {
+      0%, 100% { box-shadow: 0 8px 32px var(--coral-glow); }
+      50% { box-shadow: 0 8px 48px var(--teal-glow); }
+    }
+
+    .nav-brand-icon svg {
+      width: 26px;
+      height: 26px;
+      color: white;
+    }
+
+    .nav-features {
+      display: flex;
+      gap: 10px;
+    }
+
+    .nav-feature {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      background: linear-gradient(135deg, #1e2d3d 0%, #1a2332 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 50px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-feature:nth-child(1) { --feature-color: var(--coral); --feature-bg: rgba(255, 107, 107, 0.1); }
+    .nav-feature:nth-child(2) { --feature-color: var(--teal); --feature-bg: rgba(78, 205, 196, 0.1); }
+    .nav-feature:nth-child(3) { --feature-color: var(--purple); --feature-bg: rgba(168, 85, 247, 0.1); }
+    .nav-feature:nth-child(4) { --feature-color: var(--yellow); --feature-bg: rgba(251, 191, 36, 0.1); }
+    .nav-feature:nth-child(5) { --feature-color: var(--pink); --feature-bg: rgba(236, 72, 153, 0.1); }
+
+    .nav-feature:hover {
+      background: var(--feature-bg);
+      border-color: var(--feature-color);
+      color: var(--text-primary);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .nav-feature svg {
+      width: 16px;
+      height: 16px;
+      color: var(--feature-color);
+    }
+
+    .nav-status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      border-radius: 50px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--green);
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 20px var(--green);
+      animation: statusPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes statusPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.7; }
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 48px;
+      position: relative;
+    }
+
+    .container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 100%;
+      background:
+        radial-gradient(ellipse at 20% 30%, rgba(255, 107, 107, 0.05) 0%, transparent 40%),
+        radial-gradient(ellipse at 80% 70%, rgba(78, 205, 196, 0.05) 0%, transparent 40%),
+        radial-gradient(ellipse at 50% 50%, rgba(168, 85, 247, 0.03) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 60px 40px;
+      margin-bottom: 48px;
+      background: linear-gradient(165deg, #1e2d3d 0%, #1a2332 50%, #15202b 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gradient-hero);
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(ellipse at 20% 20%, rgba(255, 107, 107, 0.12) 0%, transparent 40%),
+        radial-gradient(ellipse at 80% 80%, rgba(78, 205, 196, 0.12) 0%, transparent 40%),
+        radial-gradient(ellipse at 50% 50%, rgba(168, 85, 247, 0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 20px;
+      background: var(--gradient-hero);
+      border-radius: 50px;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 28px;
+      animation: badgeShine 3s linear infinite;
+      position: relative;
+      z-index: 1;
+    }
+
+    @keyframes badgeShine {
+      0% { filter: brightness(1); }
+      50% { filter: brightness(1.2); }
+      100% { filter: brightness(1); }
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+      background: var(--gradient-hero);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientMove 5s ease infinite;
+      background-size: 200% 200%;
+      position: relative;
+      z-index: 1;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .hero-subtitle {
+      color: var(--text-secondary);
+      font-size: 1.25rem;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Stats Bar */
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border-subtle);
+      position: relative;
+      z-index: 1;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 16px 24px;
+      background: rgba(78, 205, 196, 0.05);
+      border-radius: 16px;
+      border: 1px solid rgba(78, 205, 196, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .stat-item:nth-child(1) {
+      background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(255, 107, 107, 0.02) 100%);
+      border-color: rgba(255, 107, 107, 0.15);
+    }
+
+    .stat-item:nth-child(2) {
+      background: linear-gradient(135deg, rgba(78, 205, 196, 0.1) 0%, rgba(78, 205, 196, 0.02) 100%);
+      border-color: rgba(78, 205, 196, 0.15);
+    }
+
+    .stat-item:nth-child(3) {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, rgba(168, 85, 247, 0.02) 100%);
+      border-color: rgba(168, 85, 247, 0.15);
+    }
+
+    .stat-item:nth-child(4) {
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.02) 100%);
+      border-color: rgba(34, 197, 94, 0.15);
+    }
+
+    .stat-item:hover {
+      background: rgba(78, 205, 196, 0.15);
+      border-color: rgba(78, 205, 196, 0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 800;
+      background: var(--gradient-button);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Grid Layout */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    /* Cards */
+    .card {
+      background: linear-gradient(165deg, #1e2d3d 0%, #1a2332 50%, #15202b 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(ellipse at 0% 0%, rgba(78, 205, 196, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 100% 100%, rgba(168, 85, 247, 0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .card:hover {
+      border-color: var(--teal);
+      transform: translateY(-4px);
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4), 0 0 60px rgba(78, 205, 196, 0.1);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 32px;
+      background: linear-gradient(135deg, rgba(78, 205, 196, 0.08) 0%, rgba(168, 85, 247, 0.05) 100%);
+      border-bottom: 1px solid var(--border-subtle);
+      position: relative;
+    }
+
+    .card-header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .card-icon::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      padding: 2px;
+      background: var(--gradient-button);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+    }
+
+    .card-icon svg {
+      width: 24px;
+      height: 24px;
+      color: var(--teal);
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .card-badge {
+      padding: 8px 16px;
+      background: linear-gradient(135deg, rgba(78, 205, 196, 0.15) 0%, rgba(168, 85, 247, 0.15) 100%);
+      border: 1px solid rgba(78, 205, 196, 0.3);
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .card-body {
+      padding: 32px;
+      position: relative;
+      background: linear-gradient(180deg, rgba(30, 45, 61, 0.5) 0%, rgba(26, 35, 50, 0.8) 100%);
+    }
+
+    .card-body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(78, 205, 196, 0.04) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 8px;
+      padding: 6px;
+      background: linear-gradient(135deg, #1a2634 0%, #151d28 100%);
+      border-radius: 16px;
+      margin-bottom: 28px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .tab {
+      flex: 1;
+      padding: 14px 20px;
+      border: none;
+      background: transparent;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      transition: all 0.3s ease;
+      font-family: inherit;
+      position: relative;
+    }
+
+    .tab:hover {
+      color: var(--text-secondary);
+    }
+
+    .tab.active {
+      background: var(--gradient-button);
+      color: white;
+      box-shadow: 0 8px 24px var(--teal-glow);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: slideUp 0.4s ease;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Form Elements */
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .form-label-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--teal);
+      border-radius: 50%;
+    }
+
+    .form-input,
+    .form-textarea,
+    .form-select {
+      width: 100%;
+      padding: 16px 20px;
+      background: linear-gradient(135deg, #1a2634 0%, #151d28 100%);
+      border: 2px solid var(--border-subtle);
+      border-radius: 14px;
+      color: var(--text-primary);
+      font-size: 1rem;
+      font-family: inherit;
+      transition: all 0.3s ease;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus,
+    .form-select:focus {
+      outline: none;
+      border-color: var(--teal);
+      box-shadow: 0 0 0 4px var(--teal-glow);
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: var(--text-muted);
+    }
+
+    .form-textarea {
+      min-height: 160px;
+      resize: vertical;
+    }
+
+    .form-select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%234ecdc4' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 18px center;
+      padding-right: 48px;
+    }
+
+    /* File Upload */
+    .file-dropzone {
+      border: 2px dashed var(--border-accent);
+      border-radius: 20px;
+      padding: 56px 32px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      background: linear-gradient(145deg, #1e2d3d 0%, #1a2332 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .file-dropzone::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(78, 205, 196, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 100%, rgba(168, 85, 247, 0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .file-dropzone:hover {
+      border-color: var(--teal);
+      background: linear-gradient(145deg, rgba(78, 205, 196, 0.1) 0%, #1a2332 100%);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3), 0 0 40px rgba(78, 205, 196, 0.1);
+    }
+
+    .file-dropzone.dragover {
+      border-color: var(--coral);
+      background: linear-gradient(145deg, rgba(255, 107, 107, 0.15) 0%, #1a2332 100%);
+    }
+
+    .file-dropzone input {
+      display: none;
+    }
+
+    .file-dropzone-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 24px;
+      background: var(--gradient-button);
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 12px 32px var(--teal-glow);
+      position: relative;
+      z-index: 1;
+    }
+
+    .file-dropzone-icon svg {
+      width: 36px;
+      height: 36px;
+      color: white;
+    }
+
+    .file-dropzone-text {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .file-dropzone-text span {
+      color: var(--teal);
+    }
+
+    .file-dropzone-hint {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      position: relative;
+      z-index: 1;
+    }
+
+    .file-status {
+      margin-top: 24px;
+      padding: 18px 24px;
+      border-radius: 14px;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      display: none;
+    }
+
+    .file-status.success {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: var(--green);
+    }
+
+    .file-status.error {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255, 107, 107, 0.1);
+      border: 1px solid rgba(255, 107, 107, 0.3);
+      color: var(--coral);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 16px 28px;
+      border: none;
+      border-radius: 14px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: inherit;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background: var(--gradient-button);
+      color: white;
+      box-shadow: 0 8px 24px var(--teal-glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 36px var(--purple-glow);
+    }
+
+    .btn-primary:active {
+      transform: translateY(-1px);
+    }
+
+    .btn-coral {
+      background: var(--gradient-coral);
+      color: white;
+      box-shadow: 0 8px 24px var(--coral-glow);
+    }
+
+    .btn-coral:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 36px var(--coral-glow);
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    .btn svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 16px;
+    }
+
+    /* Output Area */
+    .output-area {
+      background: linear-gradient(145deg, #1a2634 0%, #151d28 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 28px;
+      min-height: 140px;
+      margin-top: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .output-area::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(ellipse at 30% 30%, rgba(78, 205, 196, 0.05) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 70%, rgba(168, 85, 247, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .output-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100px;
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+      gap: 12px;
+      position: relative;
+      padding: 24px;
+      background: linear-gradient(135deg, rgba(78, 205, 196, 0.03) 0%, rgba(168, 85, 247, 0.03) 100%);
+      border-radius: 12px;
+    }
+
+    .output-placeholder svg {
+      width: 40px;
+      height: 40px;
+      opacity: 0.5;
+      color: var(--teal);
+    }
+
+    /* Spinner */
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid var(--border-accent);
+      border-top-color: var(--teal);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 28px auto;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Progress Bar */
+    .progress-container {
+      width: 100%;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .progress-bar-wrapper {
+      width: 100%;
+      height: 8px;
+      background: var(--bg-input);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 16px 0;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: var(--gradient-button);
+      border-radius: 10px;
+      animation: progress-indeterminate 1.5s ease-in-out infinite;
+      width: 30%;
+    }
+
+    @keyframes progress-indeterminate {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(400%); }
+    }
+
+    .progress-text {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-top: 8px;
+    }
+
+    .progress-status {
+      color: var(--teal);
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    /* Step Progress */
+    .step-progress {
+      padding: 20px;
+    }
+
+    .step-list {
+      text-align: left;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 14px;
+    }
+
+    .step-item:last-child {
+      border-bottom: none;
+    }
+
+    .step-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .step-icon.pending {
+      background: var(--bg-input);
+      color: var(--text-muted);
+      border: 2px solid var(--border-subtle);
+    }
+
+    .step-icon.active {
+      background: var(--teal);
+      color: white;
+      animation: pulse 1s ease-in-out infinite;
+    }
+
+    .step-icon.done {
+      background: var(--green);
+      color: white;
+    }
+
+    .step-icon.error {
+      background: var(--coral);
+      color: white;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .step-text {
+      flex: 1;
+    }
+
+    .step-text.active {
+      color: var(--teal);
+      font-weight: 600;
+    }
+
+    .step-text.done {
+      color: var(--green);
+    }
+
+    .step-text.error {
+      color: var(--coral);
+    }
+
+    /* Info Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 32px;
+      max-width: 500px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: scale(1);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .modal-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .modal-icon.documents { background: rgba(255, 107, 107, 0.2); color: var(--coral); }
+    .modal-icon.audio { background: rgba(78, 205, 196, 0.2); color: var(--teal); }
+    .modal-icon.video { background: rgba(251, 191, 36, 0.2); color: var(--yellow); }
+    .modal-icon.images { background: rgba(168, 85, 247, 0.2); color: var(--purple); }
+    .modal-icon.models { background: rgba(236, 72, 153, 0.2); color: var(--pink); }
+
+    .modal-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .modal-close:hover {
+      background: var(--bg-elevated);
+      color: var(--text-primary);
+    }
+
+    .format-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .format-tag {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .format-tag.primary {
+      background: var(--gradient-button);
+      border: none;
+      color: white;
+    }
+
+    .model-item {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .model-name {
+      font-weight: 600;
+      color: var(--teal);
+      margin-bottom: 4px;
+    }
+
+    .model-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .model-badge {
+      display: inline-block;
+      background: var(--green);
+      color: white;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-left: 8px;
+    }
+
+    .nav-feature {
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .nav-feature:hover {
+      color: var(--teal);
+      transform: translateY(-2px);
+    }
+
+    /* Results Section */
+    .results-card {
+      grid-column: 1 / -1;
+      margin-top: 8px;
+    }
+
+    .routing-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 24px 28px;
+      background: linear-gradient(135deg, rgba(78, 205, 196, 0.12) 0%, rgba(168, 85, 247, 0.12) 100%);
+      border: 1px solid rgba(78, 205, 196, 0.25);
+      border-radius: 16px;
+      margin-bottom: 32px;
+      box-shadow: 0 4px 20px rgba(78, 205, 196, 0.1);
+    }
+
+    .routing-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.9375rem;
+    }
+
+    .routing-label {
+      color: var(--text-muted);
+    }
+
+    .routing-value {
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+
+    .routing-badge {
+      padding: 8px 16px;
+      background: var(--gradient-button);
+      border-radius: 50px;
+      color: white;
+      font-weight: 700;
+      font-size: 0.8125rem;
+    }
+
+    /* Quiz Questions */
+    .quiz-item {
+      background: linear-gradient(165deg, #1e2d3d 0%, #1a2332 50%, #15202b 100%);
+      border: 2px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 28px;
+      margin-bottom: 24px;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quiz-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(ellipse at 0% 0%, rgba(78, 205, 196, 0.06) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .quiz-item:hover {
+      border-color: var(--teal);
+      box-shadow: 0 0 30px rgba(78, 205, 196, 0.1);
+    }
+
+    .quiz-item.correct {
+      border-color: var(--green);
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.08) 0%, var(--bg-elevated) 100%);
+      box-shadow: 0 0 32px var(--green-glow);
+    }
+
+    .quiz-item.incorrect {
+      border-color: var(--coral);
+      background: linear-gradient(135deg, rgba(255, 107, 107, 0.08) 0%, var(--bg-elevated) 100%);
+      box-shadow: 0 0 32px var(--coral-glow);
+    }
+
+    .quiz-question {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      color: var(--text-primary);
+      line-height: 1.6;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .quiz-question-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 36px;
+      height: 36px;
+      background: var(--gradient-hero);
+      border-radius: 10px;
+      font-size: 0.875rem;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .quiz-option {
+      display: flex;
+      align-items: center;
+      padding: 18px 24px;
+      background: linear-gradient(135deg, #1e2d3d 0%, #1a2634 100%);
+      border: 2px solid var(--border-subtle);
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .quiz-option:hover {
+      border-color: var(--teal);
+      background: rgba(78, 205, 196, 0.05);
+      transform: translateX(8px);
+    }
+
+    .quiz-option.selected {
+      border-color: var(--purple);
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, rgba(78, 205, 196, 0.1) 100%);
+      box-shadow: 0 0 24px var(--purple-glow);
+    }
+
+    .quiz-option input {
+      margin-right: 16px;
+      accent-color: var(--purple);
+      width: 20px;
+      height: 20px;
+    }
+
+    .quiz-option-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: var(--gradient-button);
+      border-radius: 8px;
+      font-size: 0.8125rem;
+      font-weight: 800;
+      margin-right: 16px;
+      color: white;
+    }
+
+    .quiz-text-input {
+      width: 100%;
+      padding: 18px 22px;
+      background: linear-gradient(135deg, #1e2d3d 0%, #1a2634 100%);
+      border: 2px solid var(--border-subtle);
+      border-radius: 14px;
+      color: var(--text-primary);
+      font-size: 1rem;
+      font-family: inherit;
+      transition: all 0.3s ease;
+    }
+
+    .quiz-text-input:focus {
+      outline: none;
+      border-color: var(--teal);
+      box-shadow: 0 0 0 4px var(--teal-glow);
+    }
+
+    .quiz-feedback {
+      margin-top: 20px;
+      padding: 18px 24px;
+      border-radius: 14px;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      display: none;
+    }
+
+    .quiz-feedback.correct {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: var(--green);
+    }
+
+    .quiz-feedback.incorrect {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255, 107, 107, 0.1);
+      border: 1px solid rgba(255, 107, 107, 0.3);
+      color: var(--coral);
+    }
+
+    /* Score Card */
+    .score-card {
+      background: var(--gradient-hero);
+      border-radius: 24px;
+      padding: 48px;
+      text-align: center;
+      margin-top: 36px;
+      position: relative;
+      overflow: hidden;
+      box-shadow:
+        0 16px 48px var(--coral-glow),
+        0 0 80px rgba(78, 205, 196, 0.2),
+        0 0 120px rgba(168, 85, 247, 0.15);
+      animation: scoreGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes scoreGlow {
+      0%, 100% { box-shadow: 0 16px 48px var(--coral-glow), 0 0 80px rgba(78, 205, 196, 0.2); }
+      50% { box-shadow: 0 20px 60px var(--purple-glow), 0 0 100px rgba(255, 107, 107, 0.25); }
+    }
+
+    .score-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='2' fill='%23ffffff' fill-opacity='0.1'/%3E%3C/svg%3E");
+    }
+
+    .score-value {
+      font-size: 5rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      position: relative;
+      text-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .score-details {
+      font-size: 1.375rem;
+      font-weight: 700;
+      opacity: 0.95;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .score-feedback {
+      font-size: 1.125rem;
+      opacity: 0.85;
+      position: relative;
+    }
+
+    /* Suggestions */
+    .suggestions-section {
+      margin-top: 32px;
+      padding: 32px;
+      background: linear-gradient(165deg, #2a3a4d 0%, #1e2d3d 50%, #1a2332 100%);
+      border: 1px solid rgba(251, 191, 36, 0.2);
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .suggestions-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(ellipse at 0% 0%, rgba(251, 191, 36, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 100% 100%, rgba(255, 107, 107, 0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .suggestions-title {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .suggestions-title-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--gradient-coral);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 24px var(--coral-glow);
+    }
+
+    .suggestions-title-icon svg {
+      width: 22px;
+      height: 22px;
+      color: white;
+    }
+
+    .suggestions-list {
+      list-style: none;
+    }
+
+    .suggestions-list li {
+      padding: 18px 24px;
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.08) 0%, rgba(30, 45, 61, 0.9) 100%);
+      border-left: 4px solid var(--yellow);
+      border-radius: 0 14px 14px 0;
+      margin-bottom: 14px;
+      font-size: 1rem;
+      color: var(--text-secondary);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .suggestions-list li:hover {
+      background: rgba(251, 191, 36, 0.1);
+      color: var(--text-primary);
+      transform: translateX(8px);
+    }
+
+    /* Answer Output */
+    .answer-box {
+      padding: 28px;
+      background: linear-gradient(165deg, #2a3a4d 0%, #1e2d3d 50%, #1a2332 100%);
+      border: 1px solid rgba(78, 205, 196, 0.2);
+      border-radius: 16px;
+      line-height: 1.8;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .answer-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(ellipse at 20% 20%, rgba(78, 205, 196, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(168, 85, 247, 0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .answer-text {
+      position: relative;
+      z-index: 1;
+    }
+
+    .answer-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 16px;
+      background: var(--gradient-button);
+      border-radius: 50px;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 20px;
+    }
+
+    .answer-text {
+      color: var(--text-primary);
+      font-size: 1.0625rem;
+    }
+
+    /* YouTube Preview */
+    .youtube-preview {
+      margin-top: 20px;
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #1e2d3d 0%, #1a2332 100%);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .youtube-preview iframe {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border: none;
+    }
+
+    .youtube-preview-info {
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .youtube-preview-icon {
+      width: 40px;
+      height: 40px;
+      background: #ff0000;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .youtube-preview-icon svg {
+      width: 20px;
+      height: 20px;
+      color: white;
+    }
+
+    .youtube-preview-text {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .youtube-preview-title {
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+      .container {
+        padding: 28px;
+      }
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      .stats-bar {
+        gap: 32px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav {
+        padding: 16px 24px;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .nav-features {
+        display: none;
+      }
+      .hero {
+        padding: 40px 24px;
+      }
+      .hero-title {
+        font-size: 2rem;
+      }
+      .hero-subtitle {
+        font-size: 1rem;
+      }
+      .stats-bar {
+        flex-wrap: wrap;
+        gap: 24px;
+      }
+      .card-body {
+        padding: 24px;
+      }
+      .btn-group {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated Background -->
+  <div class="bg-animation">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="#" class="nav-brand">
+      <div class="nav-brand-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+      </div>
+      StudyAI
+    </a>
+    <div class="nav-features">
+      <span class="nav-feature" onclick="showInfoModal('documents')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Documents
+      </span>
+      <span class="nav-feature" onclick="showInfoModal('audio')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg>
+        Audio
+      </span>
+      <span class="nav-feature" onclick="showInfoModal('video')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        Video
+      </span>
+      <span class="nav-feature" onclick="showInfoModal('images')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        Images
+      </span>
+      <span class="nav-feature" onclick="showInfoModal('models')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        AI Models
+      </span>
+    </div>
+    <div class="nav-status">
+      <span class="status-dot"></span>
+      System Online
+    </div>
+  </nav>
+
+  <div class="container">
+    <!-- Hero Section -->
+    <div class="hero">
+      <div class="hero-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        Level 3 AI Platform
+      </div>
+      <h1 class="hero-title">Intelligent Learning Assistant</h1>
+      <p class="hero-subtitle">Transform any study material into interactive quizzes with our multi-modal AI system. Upload documents, audio, video, or images and let AI generate personalized assessments.</p>
+
+      <div class="stats-bar">
+        <div class="stat-item">
+          <div class="stat-value">7+</div>
+          <div class="stat-label">Input Formats</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">5</div>
+          <div class="stat-label">AI Models</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">6</div>
+          <div class="stat-label">Agents</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">95%</div>
+          <div class="stat-label">Quiz Quality</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-grid">
+      <!-- Input Card -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-left">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            </div>
+            <h2 class="card-title">Input Content</h2>
+          </div>
+          <span class="card-badge">Multi-Modal</span>
+        </div>
+
+        <div class="card-body">
+          <div class="tabs">
+            <button class="tab active" onclick="switchMode('text')">Text</button>
+            <button class="tab" onclick="switchMode('file')">Upload</button>
+            <button class="tab" onclick="switchMode('youtube')">YouTube</button>
+            <button class="tab" onclick="switchMode('rag')">RAG DB</button>
+          </div>
+
+          <!-- Text Mode -->
+          <div id="text-mode" class="tab-content active">
+            <div class="form-group">
+              <label class="form-label">
+                <span class="form-label-dot"></span>
+                Study Material
+              </label>
+              <textarea id="text-input" class="form-textarea" placeholder="Paste your lecture notes, textbook content, or any study material here..."></textarea>
+            </div>
+          </div>
+
+          <!-- File Upload Mode -->
+          <div id="file-mode" class="tab-content">
+            <div class="file-dropzone" id="file-upload">
+              <input type="file" id="file-input" accept=".pdf,.doc,.docx,.ppt,.pptx,.txt,.mp3,.wav,.mp4,.avi,.jpg,.jpeg,.png">
+              <div class="file-dropzone-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="17 8 12 3 7 8"/>
+                  <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+              </div>
+              <p class="file-dropzone-text"><span>Click to upload</span> or drag and drop</p>
+              <p class="file-dropzone-hint">PDF, Word, PowerPoint, Audio, Video, Images</p>
+            </div>
+            <div id="file-info" class="file-status"></div>
+          </div>
+
+          <!-- YouTube Mode -->
+          <div id="youtube-mode" class="tab-content">
+            <div class="form-group">
+              <label class="form-label">
+                <span class="form-label-dot"></span>
+                YouTube Video URL
+              </label>
+              <div class="youtube-input-wrapper">
+                <input type="text" id="youtube-url" class="form-input" placeholder="https://www.youtube.com/watch?v=...">
+                <button class="btn btn-primary" onclick="processYouTube()" style="margin-top: 16px; width: 100%;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  Process Video
+                </button>
+              </div>
+            </div>
+            <div id="youtube-info" class="file-status"></div>
+            <div id="youtube-preview" class="youtube-preview" style="display: none;"></div>
+          </div>
+
+          <!-- RAG Mode -->
+          <div id="rag-mode" class="tab-content">
+            <div class="form-group">
+              <label class="form-label">
+                <span class="form-label-dot"></span>
+                Select from Database
+              </label>
+              <select id="lecture-select" class="form-select">
+                <option value="">Choose a lecture...</option>
+                {% for lid in lecture_ids %}
+                  <option value="{{ lid }}">{{ lid }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions Card -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-left">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <h2 class="card-title">Actions</h2>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="form-group">
+            <label class="form-label">
+              <span class="form-label-dot"></span>
+              What would you like to do?
+            </label>
+            <div class="btn-group">
+              <button class="btn btn-coral" onclick="showQuestionInput()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                Ask Question
+              </button>
+              <button class="btn btn-primary" onclick="showQuizSettings()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                Generate Quiz
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group" id="question-input-group" style="display: none;">
+            <label class="form-label">
+              <span class="form-label-dot"></span>
+              Your Question
+            </label>
+            <input type="text" id="question" class="form-input" placeholder="e.g., What is supervised learning?">
+            <button class="btn btn-coral" onclick="askQuestion()" style="margin-top: 16px; width: 100%;">
+              Submit Question
+            </button>
+          </div>
+
+          <div id="quiz-settings" style="display: none;">
+            <div class="form-group">
+              <label class="form-label">
+                <span class="form-label-dot"></span>
+                Number of Questions
+              </label>
+              <input type="number" id="num-questions" class="form-input" value="5" min="1" max="20">
+            </div>
+            <div class="form-group">
+              <label class="form-label">
+                <span class="form-label-dot"></span>
+                Difficulty Level
+              </label>
+              <select id="difficulty" class="form-select">
+                <option value="easy">Easy</option>
+                <option value="medium" selected>Medium</option>
+                <option value="hard">Hard</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" onclick="generateQuiz()" style="width: 100%;">
+              Generate Quiz
+            </button>
+          </div>
+
+          <div id="action-output" class="output-area">
+            <div class="output-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Select an action to get started
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results Card -->
+      <div class="card results-card">
+        <div class="card-header">
+          <div class="card-header-left">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            </div>
+            <h2 class="card-title">Results</h2>
+          </div>
+        </div>
+        <div class="card-body">
+          <div id="results-area">
+            <div class="output-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+              Results will appear here after generating a quiz
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentMode = 'text';
+    let uploadedFile = null;
+    let currentContent = '';
+    let currentQuiz = null;
+
+    // Mode switching
+    function switchMode(mode) {
+      currentMode = mode;
+      // Clear previous content when switching modes
+      currentContent = '';
+      currentQuiz = null;
+      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+      event.target.classList.add('active');
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+      document.getElementById(`${mode}-mode`).classList.add('active');
+      // Reset action output
+      document.getElementById('action-output').innerHTML = '<div class="select-action-hint"><div class="hint-icon">⏱</div><div>Select an action to get started</div></div>';
+    }
+
+    // Show question input
+    function showQuestionInput() {
+      document.getElementById('question-input-group').style.display = 'block';
+      document.getElementById('quiz-settings').style.display = 'none';
+    }
+
+    // Show quiz settings
+    function showQuizSettings() {
+      document.getElementById('question-input-group').style.display = 'none';
+      document.getElementById('quiz-settings').style.display = 'block';
+    }
+
+    // YouTube URL processing
+    function extractYouTubeId(url) {
+      const patterns = [
+        /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/,
+        /youtube\.com\/shorts\/([^&\n?#]+)/
+      ];
+      for (const pattern of patterns) {
+        const match = url.match(pattern);
+        if (match) return match[1];
+      }
+      return null;
+    }
+
+    async function processYouTube() {
+      const url = document.getElementById('youtube-url').value.trim();
+      const youtubeInfo = document.getElementById('youtube-info');
+      const youtubePreview = document.getElementById('youtube-preview');
+      const actionOutput = document.getElementById('action-output');
+
+      if (!url) {
+        youtubeInfo.className = 'file-status error';
+        youtubeInfo.style.display = 'flex';
+        youtubeInfo.textContent = 'Please enter a YouTube URL';
+        return;
+      }
+
+      const videoId = extractYouTubeId(url);
+      if (!videoId) {
+        youtubeInfo.className = 'file-status error';
+        youtubeInfo.style.display = 'flex';
+        youtubeInfo.textContent = 'Invalid YouTube URL format';
+        return;
+      }
+
+      // Define processing steps
+      const steps = [
+        { id: 1, text: 'Validating URL' },
+        { id: 2, text: 'Checking for subtitles' },
+        { id: 3, text: 'Downloading audio' },
+        { id: 4, text: 'Transcribing with Whisper' },
+        { id: 5, text: 'Complete' }
+      ];
+
+      // Show step-by-step progress
+      function renderSteps(currentStep, message, isError = false) {
+        let html = '<div class="step-progress"><div class="step-list">';
+        for (const step of steps) {
+          let iconClass = 'pending';
+          let textClass = '';
+          let icon = step.id;
+
+          if (step.id < currentStep) {
+            iconClass = 'done';
+            textClass = 'done';
+            icon = '✓';
+          } else if (step.id === currentStep) {
+            iconClass = isError ? 'error' : 'active';
+            textClass = isError ? 'error' : 'active';
+            icon = isError ? '✗' : '●';
+          }
+
+          const displayText = step.id === currentStep && message ? message : step.text;
+          html += `
+            <div class="step-item">
+              <div class="step-icon ${iconClass}">${icon}</div>
+              <div class="step-text ${textClass}">${displayText}</div>
+            </div>
+          `;
+        }
+        html += '</div></div>';
+        return html;
+      }
+
+      // Initial display
+      youtubeInfo.className = 'file-status';
+      youtubeInfo.style.display = 'block';
+      youtubeInfo.innerHTML = renderSteps(1, 'Starting...');
+      actionOutput.innerHTML = renderSteps(1, 'Starting...');
+
+      // Use EventSource for streaming progress
+      const eventSource = new EventSource(`/api/youtube/stream?url=${encodeURIComponent(url)}`);
+
+      eventSource.onmessage = function(event) {
+        const data = JSON.parse(event.data);
+
+        if (data.status === 'processing') {
+          youtubeInfo.innerHTML = renderSteps(data.step, data.message);
+          actionOutput.innerHTML = renderSteps(data.step, data.message);
+        }
+        else if (data.status === 'success') {
+          eventSource.close();
+          currentContent = data.content;
+
+          youtubeInfo.className = 'file-status success';
+          youtubeInfo.style.display = 'flex';
+          const source = data.source === 'subtitles' ? 'from subtitles' : 'via Whisper';
+          youtubeInfo.textContent = `✓ Video processed (${source}) - ${data.length} characters`;
+
+          actionOutput.innerHTML = '<div class="select-action-hint"><div class="hint-icon">✓</div><div>Content ready! Select Ask Question or Generate Quiz</div></div>';
+
+          // Show video preview
+          youtubePreview.style.display = 'block';
+          youtubePreview.innerHTML = `
+            <iframe src="https://www.youtube.com/embed/${data.video_id}" allowfullscreen></iframe>
+            <div class="youtube-preview-info">
+              <div class="youtube-preview-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+              <div class="youtube-preview-text">
+                <div class="youtube-preview-title">YouTube Video</div>
+                <div>Transcript extracted ${source}</div>
+              </div>
+            </div>
+          `;
+        }
+        else if (data.status === 'error') {
+          eventSource.close();
+          youtubeInfo.innerHTML = renderSteps(data.step || 1, data.error, true);
+          actionOutput.innerHTML = `<div class="file-status error" style="display:flex;">Error: ${data.error}</div>`;
+          youtubePreview.style.display = 'none';
+        }
+      };
+
+      eventSource.onerror = function(error) {
+        eventSource.close();
+        youtubeInfo.className = 'file-status error';
+        youtubeInfo.style.display = 'flex';
+        youtubeInfo.textContent = 'Connection error. Please try again.';
+        actionOutput.innerHTML = '<div class="select-action-hint"><div class="hint-icon">❌</div><div>Connection lost. Please try again.</div></div>';
+      };
+    }
+
+    // File upload handling
+    const fileUpload = document.getElementById('file-upload');
+    const fileInput = document.getElementById('file-input');
+
+    fileUpload.addEventListener('click', () => fileInput.click());
+
+    fileUpload.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      fileUpload.classList.add('dragover');
+    });
+
+    fileUpload.addEventListener('dragleave', () => {
+      fileUpload.classList.remove('dragover');
+    });
+
+    fileUpload.addEventListener('drop', (e) => {
+      e.preventDefault();
+      fileUpload.classList.remove('dragover');
+      if (e.dataTransfer.files.length > 0) {
+        handleFileUpload(e.dataTransfer.files[0]);
+      }
+    });
+
+    fileInput.addEventListener('change', (e) => {
+      if (e.target.files.length > 0) {
+        handleFileUpload(e.target.files[0]);
+      }
+    });
+
+    async function handleFileUpload(file) {
+      const fileInfo = document.getElementById('file-info');
+      fileInfo.className = 'file-status';
+      fileInfo.style.display = 'block';
+      fileInfo.innerHTML = `
+        <div class="progress-container">
+          <div class="progress-status">📄 Processing File...</div>
+          <div class="progress-bar-wrapper"><div class="progress-bar"></div></div>
+          <div class="progress-text">Uploading and extracting content from ${file.name}</div>
+        </div>
+      `;
+
+      // Also show progress in action area
+      const actionOutput = document.getElementById('action-output');
+      actionOutput.innerHTML = `
+        <div class="progress-container">
+          <div class="progress-status">⏳ Processing Input...</div>
+          <div class="progress-bar-wrapper"><div class="progress-bar"></div></div>
+          <div class="progress-text">Please wait while we process your file</div>
+        </div>
+      `;
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        const response = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData
+        });
+
+        const data = await response.json();
+
+        if (data.status === 'success') {
+          uploadedFile = file;
+          currentContent = data.content;
+          fileInfo.className = 'file-status success';
+          fileInfo.style.display = 'flex';
+          fileInfo.textContent = `${file.name} (${data.modality}) - ${data.length} characters processed`;
+          actionOutput.innerHTML = '<div class="select-action-hint"><div class="hint-icon">✓</div><div>Content ready! Select Ask Question or Generate Quiz</div></div>';
+        } else {
+          fileInfo.className = 'file-status error';
+          fileInfo.style.display = 'flex';
+          fileInfo.textContent = `Error: ${data.message || 'Upload failed'}`;
+          actionOutput.innerHTML = '<div class="select-action-hint"><div class="hint-icon">❌</div><div>Failed to process file. Try another.</div></div>';
+        }
+      } catch (error) {
+        fileInfo.className = 'file-status error';
+        fileInfo.style.display = 'flex';
+        fileInfo.textContent = `Error: ${error.message}`;
+        actionOutput.innerHTML = '<div class="select-action-hint"><div class="hint-icon">❌</div><div>Network error. Please try again.</div></div>';
+      }
+    }
+
+    // Ask Question
+    async function askQuestion() {
+      const question = document.getElementById('question').value.trim();
+      if (!question) {
+        alert('Please enter a question');
+        return;
+      }
+
+      const content = getContent();
+      if (!content && currentMode !== 'rag') {
+        alert('Please provide content first');
+        return;
+      }
+
+      const outputArea = document.getElementById('action-output');
+      outputArea.innerHTML = `
+        <div class="progress-container">
+          <div class="progress-status">🤔 Thinking...</div>
+          <div class="progress-bar-wrapper"><div class="progress-bar"></div></div>
+          <div class="progress-text">Analyzing content and generating answer</div>
+        </div>
+      `;
+
+      try {
+        const requestBody = { question };
+        if (currentMode === 'rag') {
+          requestBody.lecture_id = document.getElementById('lecture-select').value;
+        } else {
+          requestBody.content = content;
+        }
+
+        const response = await fetch('/api/ask', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(requestBody)
+        });
+
+        const data = await response.json();
+
+        if (data.status === 'success') {
+          outputArea.innerHTML = `
+            <div class="answer-box">
+              <div class="answer-label">Answer</div>
+              <div class="answer-text">${data.answer}</div>
+            </div>
+          `;
+        } else {
+          outputArea.innerHTML = `<div class="file-status error" style="display:flex;">Error: ${data.error || data.message}</div>`;
+        }
+      } catch (error) {
+        outputArea.innerHTML = `<div class="file-status error" style="display:flex;">Error: ${error.message}</div>`;
+      }
+    }
+
+    // Generate Quiz
+    async function generateQuiz() {
+      const content = getContent();
+      if (!content) {
+        alert('Please provide content first');
+        return;
+      }
+
+      const numQuestions = parseInt(document.getElementById('num-questions').value);
+      const difficulty = document.getElementById('difficulty').value;
+
+      const outputArea = document.getElementById('action-output');
+      outputArea.innerHTML = `
+        <div class="progress-container">
+          <div class="progress-status">📝 Generating Quiz...</div>
+          <div class="progress-bar-wrapper"><div class="progress-bar"></div></div>
+          <div class="progress-text">Creating ${numQuestions} questions from your content</div>
+        </div>
+      `;
+
+      try {
+        const response = await fetch('/api/quiz/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            content: content,
+            num_questions: numQuestions,
+            difficulty: difficulty
+          })
+        });
+
+        const data = await response.json();
+
+        if (data.status === 'success') {
+          currentQuiz = data.questions;
+          displayQuiz(data);
+          outputArea.innerHTML = `<div class="file-status success" style="display:flex;">Quiz generated successfully. Scroll down to answer.</div>`;
+        } else {
+          outputArea.innerHTML = `<div class="file-status error" style="display:flex;">Error: ${data.error || data.message}</div>`;
+        }
+      } catch (error) {
+        outputArea.innerHTML = `<div class="file-status error" style="display:flex;">Error: ${error.message}</div>`;
+      }
+    }
+
+    function displayQuiz(data) {
+      const resultsArea = document.getElementById('results-area');
+
+      let html = `
+        <div class="routing-info">
+          <div class="routing-item">
+            <span class="routing-label">Questions:</span>
+            <span class="routing-value">${data.num_questions}</span>
+          </div>
+          <div class="routing-item">
+            <span class="routing-label">Generator:</span>
+            <span class="routing-badge">${data.generator}</span>
+          </div>
+          <div class="routing-item">
+            <span class="routing-label">Confidence:</span>
+            <span class="routing-value">${(data.routing?.confidence * 100 || 0).toFixed(0)}%</span>
+          </div>
+        </div>
+      `;
+
+      data.questions.forEach((q, idx) => {
+        html += `
+          <div class="quiz-item" id="question-${idx}">
+            <div class="quiz-question">
+              <span class="quiz-question-number">${idx + 1}</span>
+              <span>${q.question}</span>
+            </div>
+        `;
+
+        if (q.type === 'mcq' && q.options) {
+          html += '<div class="quiz-options">';
+          q.options.forEach(opt => {
+            html += `
+              <label class="quiz-option">
+                <input type="radio" name="q${idx}" value="${opt.label}">
+                <span class="quiz-option-label">${opt.label}</span>
+                ${opt.text}
+              </label>
+            `;
+          });
+          html += '</div>';
+        } else {
+          html += `<input type="text" id="answer-${idx}" class="quiz-text-input" placeholder="Type your answer...">`;
+        }
+
+        html += `<div id="feedback-${idx}" class="quiz-feedback"></div>`;
+        html += '</div>';
+      });
+
+      html += `
+        <button class="btn btn-primary" onclick="submitQuiz()" style="margin-top: 32px; width: 100%;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px;"><polyline points="20 6 9 17 4 12"/></svg>
+          Submit Quiz
+        </button>
+      `;
+
+      resultsArea.innerHTML = html;
+
+      // Add click handlers for options
+      document.querySelectorAll('.quiz-option').forEach(option => {
+        option.addEventListener('click', function() {
+          const name = this.querySelector('input').name;
+          document.querySelectorAll(`input[name="${name}"]`).forEach(input => {
+            input.closest('.quiz-option').classList.remove('selected');
+          });
+          this.classList.add('selected');
+          this.querySelector('input').checked = true;
+        });
+      });
+    }
+
+    async function submitQuiz() {
+      if (!currentQuiz) return;
+
+      const answers = [];
+      currentQuiz.forEach((q, idx) => {
+        if (q.type === 'mcq') {
+          const selected = document.querySelector(`input[name="q${idx}"]:checked`);
+          answers.push(selected ? selected.value : '');
+        } else {
+          answers.push(document.getElementById(`answer-${idx}`).value);
+        }
+      });
+
+      try {
+        const response = await fetch('/api/quiz/evaluate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ answers })
+        });
+
+        const data = await response.json();
+
+        if (data.status === 'success') {
+          displayResults(data);
+        } else {
+          alert('Error: ' + (data.error || data.message));
+        }
+      } catch (error) {
+        alert('Error: ' + error.message);
+      }
+    }
+
+    function displayResults(data) {
+      data.results.forEach((result, idx) => {
+        const questionDiv = document.getElementById(`question-${idx}`);
+        questionDiv.classList.add(result.is_correct ? 'correct' : 'incorrect');
+
+        const feedbackDiv = document.getElementById(`feedback-${idx}`);
+        feedbackDiv.className = 'quiz-feedback ' + (result.is_correct ? 'correct' : 'incorrect');
+        feedbackDiv.innerHTML = result.feedback;
+      });
+
+      const resultsArea = document.getElementById('results-area');
+
+      let scoreHtml = `
+        <div class="score-card">
+          <div class="score-value">${data.percentage.toFixed(1)}%</div>
+          <div class="score-details">Grade: ${data.grade} | Score: ${data.total_score}/${data.max_score}</div>
+          <div class="score-feedback">${data.overall_feedback}</div>
+        </div>
+      `;
+
+      if (data.study_suggestions && data.study_suggestions.length > 0) {
+        scoreHtml += `
+          <div class="suggestions-section">
+            <div class="suggestions-title">
+              <div class="suggestions-title-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+              </div>
+              Study Suggestions
+            </div>
+            <ul class="suggestions-list">
+        `;
+        data.study_suggestions.forEach(suggestion => {
+          scoreHtml += `<li>${suggestion}</li>`;
+        });
+        scoreHtml += '</ul></div>';
+      }
+
+      resultsArea.innerHTML += scoreHtml;
+      resultsArea.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function getContent() {
+      if (currentMode === 'text') {
+        return document.getElementById('text-input').value.trim();
+      } else if (currentMode === 'file' || currentMode === 'youtube') {
+        return currentContent;
+      } else if (currentMode === 'rag') {
+        return document.getElementById('lecture-select').value;
+      }
+      return '';
+    }
+
+    // Info Modal Functions
+    const modalData = {
+      documents: {
+        title: 'Document Formats',
+        icon: 'documents',
+        description: 'Upload and process various document types for quiz generation and Q&A.',
+        formats: [
+          { name: 'PDF', primary: true },
+          { name: 'DOCX', primary: true },
+          { name: 'DOC', primary: false },
+          { name: 'PPTX', primary: true },
+          { name: 'PPT', primary: false },
+          { name: 'TXT', primary: false }
+        ]
+      },
+      audio: {
+        title: 'Audio Formats',
+        icon: 'audio',
+        description: 'Transcribe audio files using OpenAI Whisper for content extraction.',
+        formats: [
+          { name: 'MP3', primary: true },
+          { name: 'WAV', primary: true },
+          { name: 'M4A', primary: true },
+          { name: 'OGG', primary: false },
+          { name: 'FLAC', primary: false },
+          { name: 'WebM', primary: false }
+        ]
+      },
+      video: {
+        title: 'Video Formats',
+        icon: 'video',
+        description: 'Extract transcripts from video files or YouTube URLs.',
+        formats: [
+          { name: 'MP4', primary: true },
+          { name: 'AVI', primary: false },
+          { name: 'MOV', primary: true },
+          { name: 'MKV', primary: false },
+          { name: 'YouTube URL', primary: true },
+          { name: 'WebM', primary: false }
+        ]
+      },
+      images: {
+        title: 'Image Formats',
+        icon: 'images',
+        description: 'Extract text and analyze educational content from images using vision AI.',
+        formats: [
+          { name: 'JPG/JPEG', primary: true },
+          { name: 'PNG', primary: true },
+          { name: 'GIF', primary: false },
+          { name: 'BMP', primary: false },
+          { name: 'WebP', primary: false },
+          { name: 'TIFF', primary: false }
+        ]
+      },
+      models: {
+        title: 'AI Models',
+        icon: 'models',
+        description: 'Our multi-agent system uses these AI models:',
+        models: [
+          { name: 'Microsoft Phi-3 Mini 4K Instruct', desc: 'Q&A and Quiz Generation (Local, FREE)', badge: 'FREE' },
+          { name: 'Fine-tuned T5 Base', desc: 'ML Quiz Generation - Custom trained model', badge: 'LOCAL' },
+          { name: 'OpenAI Whisper (Local)', desc: 'Audio/Video transcription on device', badge: 'FREE' },
+          { name: 'Nomic Embed Text v1.5', desc: 'RAG embeddings for document retrieval', badge: 'FREE' },
+          { name: 'Sentence Transformers', desc: 'Answer evaluation and similarity scoring', badge: 'FREE' }
+        ]
+      }
+    };
+
+    function showInfoModal(type) {
+      const data = modalData[type];
+      if (!data) return;
+
+      let content = '';
+
+      if (type === 'models') {
+        content = `
+          <p style="color: var(--text-secondary); margin-bottom: 20px;">${data.description}</p>
+          ${data.models.map(m => `
+            <div class="model-item">
+              <div class="model-name">${m.name}<span class="model-badge">${m.badge}</span></div>
+              <div class="model-desc">${m.desc}</div>
+            </div>
+          `).join('')}
+        `;
+      } else {
+        content = `
+          <p style="color: var(--text-secondary); margin-bottom: 12px;">${data.description}</p>
+          <div class="format-list">
+            ${data.formats.map(f => `<span class="format-tag ${f.primary ? 'primary' : ''}">${f.name}</span>`).join('')}
+          </div>
+        `;
+      }
+
+      const iconSvg = {
+        documents: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
+        audio: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg>',
+        video: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>',
+        images: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>',
+        models: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>'
+      };
+
+      const modal = document.createElement('div');
+      modal.className = 'modal-overlay';
+      modal.innerHTML = `
+        <div class="modal-content" style="position: relative;">
+          <button class="modal-close" onclick="closeInfoModal(this)">&times;</button>
+          <div class="modal-header">
+            <div class="modal-icon ${data.icon}">${iconSvg[data.icon]}</div>
+            <div class="modal-title">${data.title}</div>
+          </div>
+          ${content}
+        </div>
+      `;
+
+      document.body.appendChild(modal);
+      setTimeout(() => modal.classList.add('active'), 10);
+
+      // Close on backdrop click
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeInfoModal(modal.querySelector('.modal-close'));
+      });
+    }
+
+    function closeInfoModal(btn) {
+      const modal = btn.closest('.modal-overlay');
+      modal.classList.remove('active');
+      setTimeout(() => modal.remove(), 300);
+    }
+  </script>
+</body>
+</html>
